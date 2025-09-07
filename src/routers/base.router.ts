@@ -1,6 +1,6 @@
 import Router from '@koa/router';
 
-const router = new Router({ prefix: '/base' })
+const router = new Router()
 
 // 基本路由示例
 router.get('/', (ctx) => {

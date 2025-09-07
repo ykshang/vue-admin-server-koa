@@ -1,44 +1,71 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
+  // 访问 https://aka.ms/tsconfig 了解更多关于此文件的信息
   "compilerOptions": {
-    // File Layout
+    // 📌 文件布局设置
+    // 指定 TypeScript 源代码的根目录
     "rootDir": "./src",
+    // 指定编译后 JavaScript 文件的输出目录
     "outDir": "./dist",
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
+    // 📌 环境设置
+    // 查看 https://aka.ms/tsconfig/module 了解更多信息
+    // 指定生成模块的代码规范 (nodenext 适用于 Node.js 最新版本)
     "module": "nodenext",
+    // 指定 ECMAScript 目标版本 (esnext 表示使用最新的 ES 特性)
     "target": "esnext",
+    // 指定要包含在编译中的库文件 (esnext 包含最新的 JavaScript API)
     "lib": ["esnext"],
-    "types": [],
-    // For nodejs:
-    // "types": ["node"],
-    // and npm install -D @types/node
+    // 指定要包含的类型声明文件 (node 为 Node.js 提供类型支持)
+    "types": ["node"],
 
-    // Other Outputs
+    // 📌 其他输出选项
+    // 生成相应的 .map 文件，用于调试时映射到源代码
     "sourceMap": true,
+    // 生成相应的 .d.ts 文件，包含类型声明
     "declaration": true,
+    // 为每个 .d.ts 文件生成 .map 文件
     "declarationMap": true,
-    // Stricter Typechecking Options
+    
+    // 📌 更严格的类型检查选项
+    // 对索引签名访问时进行未检查的约束，提高类型安全性
     "noUncheckedIndexedAccess": true,
+    // 精确的可选属性类型，防止可选属性被赋值为 undefined
     "exactOptionalPropertyTypes": true,
+    // 模块解析策略 (nodenext 与 module 选项保持一致)
     "moduleResolution": "nodenext",
 
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
+    // 📌 代码风格选项
+    // 函数的所有路径都必须有返回值
+    "noImplicitReturns": true,
+    // 类方法重写父类方法时必须使用 override 关键字
+    "noImplicitOverride": true,
+    // 报告未使用的局部变量错误
+    "noUnusedLocals": true,
+    // 报告未使用的函数参数错误
+    "noUnusedParameters": true,
+    // 禁止 switch 语句中的 fallthrough 情况（忘记 break 语句）
+    "noFallthroughCasesInSwitch": true,
+    // 通过索引签名访问属性时需要明确检查，防止意外访问不存在的属性
+    "noPropertyAccessFromIndexSignature": true,
 
-    // Recommended Options
+    // 📌 推荐选项
+    // 启用所有严格类型检查选项，提供最强的类型安全
     "strict": true,
-    // "jsx": "react-jsx",
+    // 需要显式导入模块的副作用，使模块导入更清晰
     "verbatimModuleSyntax": true,
+    // 确保每个文件都可以安全地转译而无需依赖其他导入
     "isolatedModules": true,
+    // 检查副作用导入，防止意外的副作用
     "noUncheckedSideEffectImports": true,
+    // 强制进行模块检测，确保正确识别模块
     "moduleDetection": "force",
+    // 跳过声明文件的类型检查，提高编译速度
     "skipLibCheck": true,
+    // 允许默认导入，更好地兼容 CommonJS 模块
+    "esModuleInterop": true,
+    // 允许从没有默认导出的模块进行默认导入
+    "allowSyntheticDefaultImports": true,
+    // 允许导入 JSON 模块
+    "resolveJsonModule": true
   }
 }

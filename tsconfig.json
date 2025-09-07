@@ -1,30 +1,33 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "lib": ["ES2020"],
-    "sourceMap": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "baseUrl": "./src",
-    "paths": {
+    "target": "ES2020", // 指定编译后的JavaScript版本目标
+    "module": "commonjs", // 指定生成的模块系统类型
+    "lib": ["ES2020"], // 指定要包含的库文件
+    "sourceMap": true, // 生成相应的.map文件
+    "outDir": "./dist", // 指定输出目录
+    "rootDir": "./src", // 指定输入目录
+    "strict": true, // 启用所有严格的类型检查选项
+    "esModuleInterop": true, // 允许从没有默认导出的模块进行默认导入
+    "skipLibCheck": true, // 跳过声明文件的类型检查
+    "forceConsistentCasingInFileNames": true, // 禁止对同一文件使用大小写不一致的引用
+    "moduleResolution": "node", // 指定模块解析策略
+    "baseUrl": "./src", // 指定基础目录，用于解析非相对模块名
+    // 路径映射，使模块导入更简洁
+    "paths": { 
       "@/*": ["*"],
-      "@utils/*": ["utils/*"],
-      "@controllers/*": ["controllers/*"],
-      "@models/*": ["models/*"],
-      "@routes/*": ["routes/*"],
-      "@config/*": ["config/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@services/*": ["services/*"],
-      "@constants/*": ["constants/*"],
-      "@types/*": ["types/*"],
+      "@/utils/*": ["utils/*"],
+      "@/controllers/*": ["controllers/*"],
+      "@/models/*": ["models/*"],
+      "@/routes/*": ["routes/*"],
+      "@/config/*": ["config/*"],
+      "@/middlewares/*": ["middlewares/*"],
+      "@/services/*": ["services/*"],
+      "@/constants/*": ["constants/*"],
+      "@/types/*": ["types/*"]
     }
   },
+  // 指定需要编译的文件
   "include": ["src/**/*", "config"],
+  // 指定需要排除的文件
   "exclude": ["node_modules", "dist"]
 }

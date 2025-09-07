@@ -1,19 +1,9 @@
-import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
-import serve from 'koa-static';
-import path from 'path';
-import router from './routers';
-import { connectDB } from './config/database';
-
-// 启动时连接数据库
-connectDB()
-  .then(() => {
-    console.log('数据库连接已就绪 ✅')
-  })
-  .catch((err) => {
-    console.error('❌ 数据库连接失败，错误信息：', err)
-    // process.exit(1) // 如果连接失败，退出应用
-  })
+import Koa from "koa";
+import bodyParser from "koa-bodyparser";
+import serve from "koa-static";
+import path from "path";
+import router from "./routers";
+import { connectDB } from "./config/database";
 
 // 创建Koa应用实例
 const app = new Koa();
@@ -26,30 +16,60 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 // 静态文件服务
-const staticPath = path.join(__dirname, '../public');
+const staticPath = path.join(__dirname, "../public");
 app.use(serve(staticPath));
 
 // 错误处理中间件
 app.use(async (ctx, next) => {
   try {
     await next();
-  } catch (err: any) {  // 为err添加类型声明  
+  } catch (err: any) {
+    // 为err添加类型声明
     ctx.status = err.status || 500;
     ctx.body = {
       message: err.message,
-      status: ctx.status
+      status: ctx.status,
     };
-    console.error('Server Error:', err);
+    console.error("Server Error:", err);
   }
 });
 
-// 服务器端口配置
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+async function startServer() {
+  try {
+    // 获取最大重试次数
+    const RETRY_COUNT = process.env.RETRY_COUNT ? parseInt(process.env.RETRY_COUNT, 10) : 5;
 
-// 启动服务器
-app.listen(PORT, () => {
-  console.log(`Koa 启动成功：http://localhost:${PORT}`, '🚀');
-  console.log(`服务健康检查点: http://localhost:${PORT}/api/health`, '🚀');
-});
+    let retryCount = 0;
+    // 启动时连接数据库
+    await connectDB()
+      .then(() => {
+        console.log("数据库连接已就绪", "✅");
+      })
+      .catch((err) => {
+        retryCount ++;
+        console.error("❌ 数据库连接失败，错误信息：", err);
+        if (retryCount <= RETRY_COUNT) {
+          console.log(`正在重试第 ${retryCount} 次连接...`);
+          setTimeout(connectDB, 3000); // 5秒后重试
+        } else {
+          console.error("❌ 数据库连接失败，已重试次数超过最大重试次数，退出应用...");
+          process.exit(1);
+        }
+      });
+    console.log('正在启动 Koa 应用', '🚀')
+    // 服务器端口配置
+    const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+    // 启动 Koa 服务器  
+    app.listen(PORT, () => {
+      console.log('Koa 应用启动成功', "✅");
+      console.log(`应用根地址：http://localhost:${PORT}`, "🌐");
+      console.log(`服务健康检查点: http://localhost:${PORT}/api/health`, "🌐");
+    });
+  } catch {
+    // 重试连接
+    setTimeout(connectDB, 5000); // 5秒后重试
+  }
+}
 
+startServer();
 export default app;

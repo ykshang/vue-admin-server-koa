@@ -9,9 +9,9 @@
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
+    "lib": ["esnext"],
     "types": [],
     // For nodejs:
-    // "lib": ["esnext"],
     // "types": ["node"],
     // and npm install -D @types/node
 
@@ -19,10 +19,10 @@
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
+    "moduleResolution": "nodenext",
 
     // Style Options
     // "noImplicitReturns": true,

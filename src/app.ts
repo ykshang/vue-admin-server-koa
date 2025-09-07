@@ -1,9 +1,13 @@
+import dotenv from "dotenv";
 import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import serve from "koa-static";
 import path from "path";
 import router from "./routers";
 import { connectDB } from "./config/database";
+
+// 读取环境变量
+dotenv.config();
 
 // 创建Koa应用实例
 const app = new Koa();

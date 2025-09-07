@@ -51,7 +51,6 @@ async function startServer() {
       })
       .catch((err) => {
         retryCount ++;
-        console.error("❌ 数据库连接失败，错误信息：", err);
         if (retryCount <= RETRY_COUNT) {
           console.log(`正在重试第 ${retryCount} 次连接...`);
           setTimeout(connectDB, 3000); // 5秒后重试

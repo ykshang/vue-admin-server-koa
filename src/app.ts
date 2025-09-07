@@ -3,6 +3,17 @@ import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
 import path from 'path';
 import router from './routers';
+import { connectDB } from './config/database';
+
+// 启动时连接数据库
+connectDB()
+  .then(() => {
+    console.log('数据库连接已就绪 ✅')
+  })
+  .catch((err) => {
+    console.error('❌ 数据库连接失败，错误信息：', err)
+    // process.exit(1) // 如果连接失败，退出应用
+  })
 
 // 创建Koa应用实例
 const app = new Koa();
@@ -37,8 +48,8 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 // 启动服务器
 app.listen(PORT, () => {
-  console.log(`🚀 Koa server is running at http://localhost:${PORT}`);
-  console.log(`➡  Health check endpoint: http://localhost:${PORT}/api/health`);
+  console.log(`Koa 启动成功：http://localhost:${PORT}`, '🚀');
+  console.log(`服务健康检查点: http://localhost:${PORT}/api/health`, '🚀');
 });
 
 export default app;

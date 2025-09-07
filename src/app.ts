@@ -12,7 +12,7 @@ dotenv.config();
 // 创建Koa应用实例
 const app = new Koa();
 
-// 使用中间件
+// 使用中间件解析body请求体
 app.use(bodyParser());
 
 // 使用路由中间件
@@ -56,18 +56,18 @@ async function startServer() {
           console.log(`正在重试第 ${retryCount} 次连接...`);
           setTimeout(connectDB, 3000); // 5秒后重试
         } else {
-          console.error("❌ 数据库连接失败，已重试次数超过最大重试次数，退出应用...");
+          console.error("❌ 数据库连接失败，已达到最大重试次数，退出应用...");
           process.exit(1);
         }
       });
-    console.log('正在启动 Koa 应用', '🚀')
-    // 服务器端口配置
+    console.log('正在启动 Koa 应用。。。', '🚀')
+    // 获取服务器端口配置
     const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
     // 启动 Koa 服务器  
     app.listen(PORT, () => {
       console.log('Koa 应用启动成功', "✅");
-      console.log(`应用根地址：http://localhost:${PORT}`, "🌐");
-      console.log(`服务健康检查点: http://localhost:${PORT}/api/health`, "🌐");
+      console.log(`服务根地址 ➡  http://localhost:${PORT}`, "🌐");
+      console.log(`服务健康检查点 ➡  http://localhost:${PORT}/api/health`, "🌐");
     });
   } catch {
     // 重试连接

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 // 数据库连接配置
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/demo';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/vue-admin';
 
 // 连接状态
 let isConnected = false

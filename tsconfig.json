@@ -1,4 +1,7 @@
 {
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
     "target": "ES2020", // 指定编译后的JavaScript版本目标
     "module": "commonjs", // 指定生成的模块系统类型
@@ -11,9 +14,10 @@
     "skipLibCheck": true, // 跳过声明文件的类型检查
     "forceConsistentCasingInFileNames": true, // 禁止对同一文件使用大小写不一致的引用
     "moduleResolution": "node", // 指定模块解析策略
+
     "baseUrl": "./src", // 指定基础目录，用于解析非相对模块名
     // 路径映射，使模块导入更简洁
-    "paths": { 
+    "paths": {
       "@/*": ["*"],
       "@/utils/*": ["utils/*"],
       "@/controllers/*": ["controllers/*"],

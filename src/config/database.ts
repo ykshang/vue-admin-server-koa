@@ -33,7 +33,7 @@ mongoose.connection.on('connected', () => {
 })
 
 mongoose.connection.on('error', (err) => {
-  console.error('❌ MongoDB 发生运行时错误，错误信息：', err)
+  console.error('❌ MongoDB client 检测到运行时错误：', err)
 })
 
 mongoose.connection.on('disconnected', () => {
@@ -41,7 +41,7 @@ mongoose.connection.on('disconnected', () => {
   isConnected = false
 })
 mongoose.connection.on('reconnected', () => {
-  console.info('MongoDB 重新连接成功...', '✔')
+  console.info('MongoDB client 重新连接成功...', '✔')
 });
 
 // 导出连接函数和 mongoose 实例

@@ -1,68 +1,14 @@
 import Router from '@koa/router';
-// import dictionaryService from '../service/dictionary.js'
+import dictionaryController from '@/controllers/dictionary.controller' 
 
 const router = new Router({ prefix: '/dictionary' })
 
-router.post('/getDictionaryListByPage', async (ctx) => {
-  // const resultList = await dictionaryService.getDictionaryListByPage(ctx.request.body)
-  ctx.body = {
-    code: 200,
-    data: {},
-    message: 'success'
-  }
-})
-router.post('/createDictionary', async (ctx) => {
-  // console.log('请求体', ctx.request.body)
-  // const resultList = await dictionaryService.createDictionary(ctx.request.body)
-  ctx.body = {
-    code: 200,
-    data: {},
-    message: 'success'
-  }
-})
-router.post('/removeDictionary', async (ctx) => {
-  // console.log('请求体', ctx.request.body)
-  // const resultList = await dictionaryService.removeDictionary(ctx.request.body)
-  ctx.body = {
-    code: 200,
-    data: {},
-    message: 'success'
-  } 
-})
-router.post('/updateDictionary', async (ctx) => {
-  // console.log('请求体', ctx.request.body)
-  // const resultList = await dictionaryService.updateDictionary(ctx.request.body)
-  ctx.body = {
-    code: 200,
-    data: {},
-    message: 'success'
-  }
-})
-router.post('/createDictionaryItem', async (ctx) => {
-  // console.log('请求体', ctx.request.body)
-  // const resultList = await dictionaryService.createDictionaryItem(ctx.request.body)
-  ctx.body = {
-    code: 200,
-    data: {},
-    message: 'success'
-  }
-})
-router.post('/getDictionaryItemList', async (ctx) => {
-  // console.log('请求体', ctx.request.body)
-  // const resultList = await dictionaryService.getDictionaryItemList(ctx.request.body)
-  ctx.body = {
-    code: 200,
-    data: {},
-    message: 'success'
-  }
-})
-router.post('/removeDictionaryItem', async (ctx) => {
-  console.log('请求体', ctx.request.body)
-  // const resultList = await dictionaryService.removeDictionaryItem(ctx.request.body)
-  ctx.body = {
-    code: 200,
-    data: {},
-    message: 'success'
-  }
-})
+router.post('/getDictionaryListByPage', dictionaryController.getDictionaryListByPage)
+router.post('/createDictionary', dictionaryController.createDictionary)
+router.post('/removeDictionary', dictionaryController.removeDictionary)
+router.post('/updateDictionary', dictionaryController.updateDictionary)
+router.post('/createDictionaryItem', dictionaryController.createDictionaryItem)
+router.post('/getDictionaryItemList', dictionaryController.getDictionaryItemList)
+router.post('/removeDictionaryItem', dictionaryController.removeDictionaryItem)
+
 export default router

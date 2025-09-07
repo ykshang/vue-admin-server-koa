@@ -1,26 +1,15 @@
 import Koa from 'koa';
-import Router from '@koa/router';
 import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
 import path from 'path';
+// 导入路由实例
+import router from './routers';
 
 // 创建Koa应用实例
 const app = new Koa();
 
 // 使用中间件
 app.use(bodyParser());
-
-// 创建路由实例
-const router = new Router();
-
-// 基本路由示例
-router.get('/', (ctx) => {
-  ctx.body = 'Hello, Koa Server!';
-});
-
-router.get('/api/health', (ctx) => {
-  ctx.body = { status: 'OK', timestamp: new Date().toISOString() };
-});
 
 // 使用路由中间件
 app.use(router.routes());

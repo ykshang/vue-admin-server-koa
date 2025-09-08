@@ -45,4 +45,4 @@ mongoose.connection.on('reconnected', () => {
 });
 
 // 导出连接函数和 mongoose 实例
-export { connectDB, mongoose as default }
+export { connectDB }

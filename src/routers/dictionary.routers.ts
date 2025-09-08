@@ -1,5 +1,5 @@
 import Router from '@koa/router';
-import dictionaryController from '@/controllers/dictionary.controller' 
+import dictionaryController from '@/controllers/dictionary' 
 
 const router = new Router({ prefix: '/dictionary' })
 

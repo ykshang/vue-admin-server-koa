@@ -1,5 +1,7 @@
 import { Context } from "koa"
 
+import dictionaryService from "@/services/dictionary";
+
 function getDictionaryListByPage() {}
 function getDictionaryItemList(ctx: Context) {
   return ctx.body = {
@@ -7,7 +9,11 @@ function getDictionaryItemList(ctx: Context) {
     message: '获取字典列表成功',
   }
 }
-function createDictionary() {}
+function createDictionary(ctx: Context) {
+  let request = ctx.request.body
+  dictionaryService.createDictionary(request)
+  console.log(request)
+}
 function removeDictionary() {}
 function updateDictionary() {}
 function createDictionaryItem() {}

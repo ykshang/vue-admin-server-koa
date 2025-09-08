@@ -3,12 +3,12 @@ import dictionaryController from '@/controllers/dictionary'
 
 const router = new Router({ prefix: '/dictionary' })
 
-router.post('/getDictionaryListByPage', dictionaryController.getDictionaryListByPage)
 router.post('/createDictionary', dictionaryController.createDictionary)
-router.post('/removeDictionary', dictionaryController.removeDictionary)
-router.post('/updateDictionary', dictionaryController.updateDictionary)
 router.post('/createDictionaryItem', dictionaryController.createDictionaryItem)
-router.get('/getDictionaryItemList', dictionaryController.getDictionaryItemList)
+router.post('/getDictionaryListByPage', dictionaryController.getDictionaryListByPage)
+router.post('/getDictionaryItemList', dictionaryController.getDictionaryItemList)
+router.post('/removeDictionary', dictionaryController.removeDictionary)
 router.post('/removeDictionaryItem', dictionaryController.removeDictionaryItem)
+router.post('/updateDictionary', dictionaryController.updateDictionary)
 
 export default router

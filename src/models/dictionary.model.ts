@@ -1,6 +1,5 @@
-import mongoose from "@/config/database"; // 复用连接
 import { extFieldDocument } from "@/types/base";
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 // 定义用户接口
 export interface DictionaryInterface extends extFieldDocument, Document {

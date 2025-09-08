@@ -1,17 +1,14 @@
 import mongoose from "@/config/database"; // 复用连接
 import { extFieldDocument } from "@/types/base";
-import { Schema, model, Document } from "mongoose";
+import { Document } from "mongoose";
 
 // 定义用户接口
 export interface DictionaryInterface extends extFieldDocument, Document {
   dictionaryKey: string;
   dictionaryName: string;
-  desc: string;
-  createdAt: Date;
-  updatedAt: Date;
-  // 虚拟字段：格式化创建时间
-  formattedCreatedAt: string;
-  formattedUpdatedAt: string;
+  description?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // 定义用户模型
@@ -29,7 +26,6 @@ const schemaDefinition = new mongoose.Schema({
   dictionaryName: {
     type: String,
     required: true,
-    unique: false,
     trim: true,
     minlength: 5,
     maxlength: 100

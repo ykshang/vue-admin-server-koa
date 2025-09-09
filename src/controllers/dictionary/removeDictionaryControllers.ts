@@ -1,8 +1,13 @@
 import { Context } from "koa";
 
-export default function removeDictionary(ctx: Context) {
+import DictionaryService from "@/services/dictionary";
+export default async function removeDictionary(ctx: Context) {
+  let request = ctx.request.body as { _id: string };
+  let result = await DictionaryService.removeDictionary(request);
   return ctx.body = {
+    code:200,
     success: true,
-    message: '获取字典列表成功',
+    message: '删除字典成功',
+    result: result
   }
 }

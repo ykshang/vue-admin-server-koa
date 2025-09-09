@@ -1,7 +1,7 @@
-export default async function removeDictionaryService(request: any) {
-  console.log(request)
-  return {
-    success: true,
-    message: '删除字典成功',
-  }
+import DictionaryModel from "@/models/dictionary.model";
+// 根据 _id 删除字典
+export default async function (request: { _id: any; }) {
+  // console.log(request)
+  const result = await DictionaryModel.deleteOne({ _id: request._id });
+  return result;
 }

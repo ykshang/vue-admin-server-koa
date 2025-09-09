@@ -8,7 +8,7 @@ export default async function (request: any) {
       $set: {
         dictionaryKey: request.dictionaryKey,
         dictionaryName: request.dictionaryName,
-        desc: request.desc,
+        description: request.description,
         updatedAt: new Date(),
       },
     },

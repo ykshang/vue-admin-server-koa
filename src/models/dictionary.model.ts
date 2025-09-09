@@ -18,16 +18,16 @@ const schemaDefinition = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
-    minlength: 3,
-    maxlength: 50,
+    minlength: [3, '字典关键词长度不能小于3'],
+    maxlength: [50, '字典关键词长度不能大于50'],
   },
   // 字典名称
   dictionaryName: {
     type: String,
     required: true,
     trim: true,
-    minlength: 5,
-    maxlength: 100
+    minlength: [5, '字典名称长度不能小于5'],
+    maxlength: [100, '字典名称长度不能大于100']
   },
   // 描述
   description: {
@@ -36,8 +36,8 @@ const schemaDefinition = new mongoose.Schema({
     required: false,
     unique: false,
     trim: true,
-    minlength: 0,
-    maxlength: 200
+    minlength: [0, '描述长度不能小于0'],
+    maxlength: [200, '描述长度不能大于200']
   },
   createdAt: {
     type: Date,

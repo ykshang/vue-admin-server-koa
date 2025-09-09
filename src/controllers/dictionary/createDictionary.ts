@@ -3,10 +3,11 @@ import DictionaryService from "@/services/dictionary";
 
 export default function createDictionary(ctx: Context) {
   let request = ctx.request.body;
-  DictionaryService.createDictionary(request);
-  console.log(request);
-  return (ctx.body = {
-    success: true,
-    message: "获取字典列表成功",
-  });
+  // console.log("createDictionaryController, request:", request);
+  try {
+    return DictionaryService.createDictionary(request);
+  } catch (err: any) {
+    console.log("createDictionary, err:", err);
+    throw err; // 重新抛出错误
+  }
 }

@@ -1,0 +1,340 @@
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+const validator = require('validator');
+
+const userSchema = new mongoose.Schema({
+  // 基本身份信息
+  username: {
+    type: String,
+    required: [true, '用户名是必填项'],
+    unique: true,
+    trim: true,
+    minlength: [3, '用户名不能少于3个字符'],
+    maxlength: [30, '用户名不能超过30个字符'],
+    match: [/^[a-zA-Z0-9_]+$/, '用户名只能包含字母、数字和下划线']
+  },
+  email: {
+    type: String,
+    required: [true, '邮箱是必填项'],
+    unique: true,
+    lowercase: true,
+    validate: [validator.isEmail, '请输入有效的邮箱地址']
+  },
+  password: {
+    type: String,
+    required: [true, '密码是必填项'],
+    minlength: [6, '密码不能少于6个字符'],
+    select: false // 默认查询时不返回密码字段
+  },
+  
+  // 个人资料信息
+  profile: {
+    firstName: {
+      type: String,
+      trim: true,
+      maxlength: 50
+    },
+    lastName: {
+      type: String,
+      trim: true,
+      maxlength: 50
+    },
+    avatar: {
+      type: String,
+      default: 'default-avatar.png',
+      validate: [validator.isURL, '头像必须是有效的URL']
+    },
+    bio: {
+      type: String,
+      maxlength: 500
+    },
+    dateOfBirth: {
+      type: Date,
+      validate: {
+        validator: function(dob: any) {
+          return dob < new Date();
+        },
+        message: '出生日期不能是未来时间'
+      }
+    },
+    gender: {
+      type: String,
+      enum: {
+        values: ['male', 'female', 'other', 'prefer-not-to-say'],
+        message: '性别必须是 male, female, other 或 prefer-not-to-say'
+      }
+    }
+  },
+  
+  // 联系信息
+  contact: {
+    phone: {
+      type: String,
+      validate: {
+        validator: function(v: string) {
+          return /^(\+\d{1,3}[- ]?)?\d{10}$/.test(v);
+        },
+        message: '请输入有效的电话号码'
+      }
+    },
+    address: {
+      street: String,
+      city: String,
+      state: String,
+      country: String,
+      zipCode: String
+    }
+  },
+  
+  // 账户状态与权限
+  role: {
+    type: String,
+    enum: {
+      values: ['user', 'moderator', 'admin'],
+      message: '角色必须是 user, moderator 或 admin'
+    },
+    default: 'user'
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
+  },
+  
+  // 安全相关
+  passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
+  emailVerificationToken: String,
+  emailVerificationExpires: Date,
+  
+  // 社交登录
+  socialLogins: {
+    google: {
+      id: String,
+      email: String
+    },
+    facebook: {
+      id: String,
+      email: String
+    },
+    github: {
+      id: String,
+      email: String
+    }
+  },
+  
+  // 偏好设置
+  preferences: {
+    language: {
+      type: String,
+      default: 'zh-CN'
+    },
+    theme: {
+      type: String,
+      enum: ['light', 'dark', 'auto'],
+      default: 'auto'
+    },
+    notifications: {
+      email: { type: Boolean, default: true },
+      push: { type: Boolean, default: true },
+      sms: { type: Boolean, default: false }
+    }
+  },
+  
+  // 统计信息
+  stats: {
+    loginCount: {
+      type: Number,
+      default: 0
+    },
+    lastLogin: Date,
+    postCount: {
+      type: Number,
+      default: 0
+    },
+    commentCount: {
+      type: Number,
+      default: 0
+    }
+  }
+}, {
+  // Schema 选项
+  timestamps: true, // 自动添加 createdAt 和 updatedAt
+  toJSON: { 
+    virtuals: true,
+    transform: function(doc: any, ret: any) {
+      // 删除敏感信息
+      delete ret.password;
+      delete ret.passwordResetToken;
+      delete ret.passwordResetExpires;
+      delete ret.emailVerificationToken;
+      delete ret.emailVerificationExpires;
+      delete ret.__v;
+      return ret;
+    }
+  },
+  toObject: { 
+    virtuals: true,
+    transform: function(doc: any, ret: any) {
+      // 删除敏感信息
+      delete ret.password;
+      delete ret.passwordResetToken;
+      delete ret.passwordResetExpires;
+      delete ret.emailVerificationToken;
+      delete ret.emailVerificationExpires;
+      delete ret.__v;
+      return ret;
+    }
+  }
+});
+
+// 虚拟字段
+userSchema.virtual('profile.fullName').get(function() {
+  return `${this.profile.firstName || ''} ${this.profile.lastName || ''}`.trim();
+});
+
+userSchema.virtual('isAdmin').get(function() {
+  return this.role === 'admin';
+});
+
+userSchema.virtual('isModerator').get(function() {
+  return this.role === 'moderator' || this.role === 'admin';
+});
+
+userSchema.virtual('age').get(function() {
+  if (!this.profile.dateOfBirth) return null;
+  const today = new Date();
+  const birthDate = new Date(this.profile.dateOfBirth);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  
+  return age;
+});
+
+// 索引优化
+userSchema.index({ email: 1 });
+userSchema.index({ username: 1 });
+userSchema.index({ 'socialLogins.google.id': 1 });
+userSchema.index({ 'socialLogins.facebook.id': 1 });
+userSchema.index({ 'socialLogins.github.id': 1 });
+userSchema.index({ createdAt: 1 });
+userSchema.index({ isActive: 1, role: 1 });
+userSchema.index({ 'contact.phone': 1 });
+
+// 文档中间件 - 保存前执行
+userSchema.pre('save', async function(next) {
+  // 如果密码没有被修改，直接下一步
+  if (!this.isModified('password')) return next();
+  
+  // 加密密码 (成本因子为12)
+  this.password = await bcrypt.hash(this.password, 12);
+  
+  // 如果密码被修改且不是新文档，更新passwordChangedAt字段
+  if (!this.isNew && this.isModified('password')) {
+    this.passwordChangedAt = Date.now() - 1000; // 减1秒确保token在密码更改后创建
+  }
+  
+  next();
+});
+
+// 实例方法 - 检查密码是否正确
+userSchema.methods.correctPassword = async function(candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
+// 实例方法 - 检查密码是否在JWT令牌签发后更改
+userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+    return JWTTimestamp < changedTimestamp;
+  }
+  return false;
+};
+
+// 实例方法 - 创建密码重置令牌
+userSchema.methods.createPasswordResetToken = function() {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+    
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000; // 10分钟有效期
+  
+  return resetToken;
+};
+
+// 实例方法 - 创建邮箱验证令牌
+userSchema.methods.createEmailVerificationToken = function() {
+  const verificationToken = crypto.randomBytes(32).toString('hex');
+  
+  this.emailVerificationToken = crypto
+    .createHash('sha256')
+    .update(verificationToken)
+    .digest('hex');
+    
+  this.emailVerificationExpires = Date.now() + 24 * 60 * 60 * 1000; // 24小时有效期
+  
+  return verificationToken;
+};
+
+// 静态方法 - 通过邮箱查找用户（包含密码字段）
+userSchema.statics.findByEmail = function(email: string) {
+  return this.findOne({ email }).select('+password');
+};
+
+// 静态方法 - 通过用户名查找用户（包含密码字段）
+userSchema.statics.findByUsername = function(username: string) {  
+  return this.findOne({ username }).select('+password');
+};
+
+// 静态方法 - 检查邮箱或用户名是否已存在
+userSchema.statics.isEmailOrUsernameTaken = async function(email: string, username: string) {
+  const user = await this.findOne({
+    $or: [{ email }, { username }]
+  });
+  
+  return {
+    emailTaken: user && user.email === email,
+    usernameTaken: user && user.username === username
+  };
+};
+
+// 查询助手 - 只返回活跃用户
+userSchema.query.active = function() {
+  return this.where({ isActive: true });
+};
+
+// 查询助手 - 按角色过滤
+userSchema.query.byRole = function(role: string) {
+  return this.where({ role });
+};
+
+// 查询助手 - 搜索用户
+userSchema.query.search = function(keyword: any) {
+  if (!keyword) return this;
+  
+  const regex = new RegExp(keyword, 'i');
+  return this.find({
+    $or: [
+      { username: regex },
+      { email: regex },
+      { 'profile.firstName': regex },
+      { 'profile.lastName': regex }
+    ]
+  });
+};
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

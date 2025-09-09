@@ -1,10 +1,10 @@
-import createDictionary from "./createDictionary";
-import createDictionaryItem from "./createDictionaryItem";
-import getDictionaryItemList from "./getDictionaryItemList";
-import getDictionaryListByPage from "./getDictionaryListByPage";
-import removeDictionary from "./removeDictionary";
-import removeDictionaryItem from "./removeDictionaryItem";
-import updateDictionary from "./updateDictionary";
+import createDictionary from "./createDictionaryControllers";
+import createDictionaryItem from "./createDictionaryItemControllers";
+import getDictionaryItemList from "./getDictionaryItemListControllers";
+import getDictionaryListByPage from "./getDictionaryListByPageControllers";
+import removeDictionary from "./removeDictionaryControllers";
+import removeDictionaryItem from "./removeDictionaryItemControllers";
+import updateDictionary from "./updateDictionaryControllers";
 
 export default {
   createDictionary,

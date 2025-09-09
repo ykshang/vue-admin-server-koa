@@ -7,7 +7,7 @@ interface ReqType {
 }
 export default async function getDictionaryListByPage(ctx: Context) {
   let request = ctx.request.body as ReqType;
-  console.log("getDictionaryListByPageController, ctx:", request);
+  // console.log("getDictionaryListByPageController, ctx:", request);
   let { isChecked, errMessage } = businessValidate(request);
   if (!isChecked) {
     throw errMessage;

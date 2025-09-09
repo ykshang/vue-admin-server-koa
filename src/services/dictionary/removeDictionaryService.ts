@@ -1,4 +1,4 @@
-export default async function removeDictionary(request: any) {
+export default async function removeDictionaryService(request: any) {
   console.log(request)
   return {
     success: true,

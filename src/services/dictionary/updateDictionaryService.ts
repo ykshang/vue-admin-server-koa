@@ -1,4 +1,4 @@
-export default async function updateDictionary(request: any) {
+export default async function updateDictionaryService(request: any) {
   console.log(request)
   return {
     success: true,

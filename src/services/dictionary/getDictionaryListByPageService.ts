@@ -1,6 +1,6 @@
 import DictionaryModel from "@/models/dictionary.model";
 
-export default async function getDictionaryListByPage(request: any) {
+export default async function getDictionaryListByPageService(request: any) {
   // console.log("getDictionaryListByPageService, ctx:", request);
   const { pageNum, pageSize, dictionaryKey } = request;
   let params: {

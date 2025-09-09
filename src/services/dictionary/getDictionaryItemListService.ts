@@ -1,4 +1,4 @@
-export default async function getDictionaryItemList(request: any) {
+export default async function getDictionaryItemListService(request: any) {
   console.log(request)
   return {
     success: true,

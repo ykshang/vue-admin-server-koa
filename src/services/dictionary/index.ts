@@ -1,17 +1,17 @@
-import createDictionary from './createDictionary'
-import createDictionaryItem from './createDictionaryItem'
-import getDictionaryListByPage from './getDictionaryListByPage'
-import getDictionaryItemList from './getDictionaryItemList'
-import removeDictionary from './removeDictionary'
-import removeDictionaryItem from './removeDictionaryItem'
-import updateDictionary from './updateDictionary'
+import createDictionaryService from './createDictionaryService'
+import createDictionaryItemService from './createDictionaryItemService'
+import getDictionaryListByPageService from './getDictionaryListByPageService'
+import getDictionaryItemListService from './getDictionaryItemListService'
+import removeDictionaryService from './removeDictionaryService'
+import removeDictionaryItemService from './removeDictionaryItemService'
+import updateDictionaryService from './updateDictionaryService'
 
 export default {
-  createDictionary,
-  createDictionaryItem,
-  getDictionaryListByPage,
-  getDictionaryItemList,
-  removeDictionary,
-  removeDictionaryItem,
-  updateDictionary,
+  createDictionaryService,
+  createDictionaryItemService,
+  getDictionaryListByPageService,
+  getDictionaryItemListService,
+  removeDictionaryService,
+  removeDictionaryItemService,
+  updateDictionaryService,
 }

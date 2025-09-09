@@ -7,7 +7,7 @@ export default async function createDictionary(ctx: Context) {
   try {
     let result = await DictionaryService.createDictionary(request);
     ctx.body = result;
-  } catch (err: any) {
+  } catch (err) {
     // console.log("createDictionary, err:", err);
     throw err; // 重新抛出错误
   }

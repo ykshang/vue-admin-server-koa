@@ -7,7 +7,7 @@ export default function createDictionary(ctx: Context) {
   try {
     return DictionaryService.createDictionary(request);
   } catch (err: any) {
-    console.log("createDictionary, err:", err);
+    // console.log("createDictionary, err:", err);
     throw err; // 重新抛出错误
   }
 }

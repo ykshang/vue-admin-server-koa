@@ -1,8 +1,13 @@
 import { Context } from "koa";
+import DictionaryService from "@/services/dictionary";
 
-export default function updateDictionary(ctx: Context) {
-  return ctx.body = {
+export default async function updateDictionary(ctx: Context) {
+  const request = ctx.request.body
+  const result = await DictionaryService.updateDictionary(request)
+  ctx.body = {
+    code: 200,
     success: true,
-    message: '获取字典列表成功',
-  }
+    message: "更新字典成功",
+    result: result,
+  };
 }

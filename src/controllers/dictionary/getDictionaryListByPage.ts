@@ -18,7 +18,7 @@ export default async function getDictionaryListByPage(ctx: Context) {
     code: 200,
     success: true,
     message: "获取字典列表成功",
-    data: result,
+    result: result,
   };
 }
 function businessValidate(params: ReqType) {

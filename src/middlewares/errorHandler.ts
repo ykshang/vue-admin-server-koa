@@ -7,7 +7,8 @@ export default async function errorHandler(ctx: Context, next: () => Promise<any
     // 统一处理mongoose校验错误
     if (err.name === 'ValidationError') {
       ctx.status = 422;
-      ctx.body = { 
+      ctx.body = {
+        success: false,
         code: 1001,
         message: '数据校验失败: ' + Object.values(err.errors).map((e: any) => e.message).join('; ')
       };
@@ -16,6 +17,7 @@ export default async function errorHandler(ctx: Context, next: () => Promise<any
     else if (err.code === 11000) {
       ctx.status = 409;
       ctx.body = {
+        success: false,
         code: 1002, 
         message: '数据已存在，请避免重复创建',
         field: Object.keys(err.keyPattern)[0],
@@ -25,6 +27,7 @@ export default async function errorHandler(ctx: Context, next: () => Promise<any
     else {
       ctx.status = err.status || 500;
       ctx.body = {
+        success: false,
         code: err.code || 500,
         message: err.message || '服务器内部错误'
       };

@@ -13,14 +13,9 @@ dotenv.config();
 // 创建Koa应用实例
 const app = new Koa();
 
-// 使用中间件解析body请求体
-app.use(bodyParser());
-
-
-
 // 中间件注册（需在路由之前）
-app.use(errorHandler);
-app.use(bodyParser());
+app.use(errorHandler); // 错误处理中间件
+app.use(bodyParser()); // 使用中间件解析body请求体
 
 // 静态文件服务
 const staticPath = path.join(__dirname, "../public");
@@ -29,8 +24,6 @@ app.use(serve(staticPath));
 // 使用路由中间件
 app.use(router.routes());
 app.use(router.allowedMethods());
-
-
 
 async function startServer() {
   try {

@@ -6,6 +6,6 @@ export default async function createDictionary(request: any) {
     code: 200,
     success: true,
     message: "创建字典成功",
-    data: result,
+    result: result,
   };
 }

@@ -13,10 +13,13 @@ export default async function getDictionaryListByPage(ctx: Context) {
     throw errMessage;
   }
   let result = await DictionaryService.getDictionaryListByPage(request);
-  return (ctx.body = {
+  // console.log('getDictionaryListByPageController, result:', result);
+  ctx.body = {
+    code: 200,
     success: true,
     message: "获取字典列表成功",
-  });
+    data: result,
+  };
 }
 function businessValidate(params: ReqType) {
   let { pageNum, pageSize } = params;

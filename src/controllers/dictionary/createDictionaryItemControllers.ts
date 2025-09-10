@@ -1,10 +1,11 @@
+import logger from "@/utils/logger";
 import { Context } from "koa";
 
 export default function createDictionaryItem(ctx: Context) {
   let request = ctx.request.body;
-  console.log('createDictionaryItem：', request);
+  logger.info(`createDictionaryItemControllers, request: ${JSON.stringify(request)}`); 
   return ctx.body = {
     success: true,
-    message: '获取字典列表成功',
+    message: '创建字典项成功',
   }
 }

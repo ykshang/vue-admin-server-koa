@@ -24,13 +24,13 @@
     "koa-body": "^6.0.1",
     "koa-bodyparser": "^4.4.1",
     "koa-combine-routers": "^4.0.2",
-    "koa-requestid": "^2.2.1",
     "koa-session2": "^2.2.10",
     "koa-static": "^5.0.0",
     "module-alias": "^2.2.3",
     "mongodb": "^6.19.0",
     "mongoose": "^8.18.0",
     "nodemon": "^3.1.10",
+    "uuid": "^13.0.0",
     "winston": "^3.17.0"
   },
   "devDependencies": {

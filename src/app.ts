@@ -3,9 +3,12 @@ import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import serve from "koa-static";
 import path from "path";
-import router from "./routers";
-import { connectDB } from "./config/database";
-import errorHandler from './middlewares/errorHandler';
+import requestId from 'koa-requestid'; // 用于生成唯一请求ID
+
+import router from "@/routers";
+import { connectDB } from "@/config/database";
+import errorHandler from '@/middlewares/errorHandler';
+import loggerMiddleware from '@/middlewares/logger'; // 导入我们刚创建的日志中间件
 
 // 读取环境变量
 dotenv.config();
@@ -15,7 +18,15 @@ const app = new Koa();
 
 // 中间件注册（需在路由之前）
 app.use(errorHandler); // 错误处理中间件
-app.use(bodyParser()); // 使用中间件解析body请求体
+
+// 为每个请求生成一个唯一的 ID
+app.use(requestId());
+
+// 日志中间件
+app.use(loggerMiddleware);
+
+// 使用中间件解析body请求体
+app.use(bodyParser());
 
 // 静态文件服务
 const staticPath = path.join(__dirname, "../public");

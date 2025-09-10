@@ -3,11 +3,11 @@ import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import serve from "koa-static";
 import path from "path";
-import requestId from 'koa-requestid'; // 用于生成唯一请求ID
 
 import router from "@/routers";
 import { connectDB } from "@/config/database";
 import errorHandler from '@/middlewares/errorHandler';
+import requestId from '@/middlewares/requestId';
 import loggerMiddleware from '@/middlewares/logger'; // 导入我们刚创建的日志中间件
 
 // 读取环境变量
@@ -20,7 +20,7 @@ const app = new Koa();
 app.use(errorHandler); // 错误处理中间件
 
 // 为每个请求生成一个唯一的 ID
-app.use(requestId());
+app.use(requestId);
 
 // 日志中间件
 app.use(loggerMiddleware);

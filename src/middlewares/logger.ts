@@ -1,6 +1,6 @@
 import { Context } from "vm";
 
-import logger from "@/config/logger"; // 导入我们刚创建的logger
+import logger from "@/utils/logger"; // 导入我们刚创建的logger
 
 // 创建一个自定义的日志中间件
 export default async function (ctx: Context, next: () => Promise<any>) {

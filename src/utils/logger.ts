@@ -27,7 +27,7 @@ const logger = winston.createLogger({
       filename: 'src/logs/app-%DATE%.log',
       datePattern: 'YYYY-MM-DD',
       zippedArchive: true,
-      maxSize: '20m',
+      maxSize: '10m',
       maxFiles: '30d',
       format: winston.format.combine(
         winston.format.uncolorize(),

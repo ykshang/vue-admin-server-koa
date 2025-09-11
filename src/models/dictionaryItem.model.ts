@@ -19,16 +19,16 @@ const schemaDefinition = new mongoose.Schema({
     required: true,
     unique: false, // 不同的字典之间的字典项的关键词可以重复
     trim: true,
-    minlength: [1, '字典项关键词长度不能小于1'],
-    maxlength: [50, '字典项关键词长度不能大于50'],
+    minlength: [1, '字典项关键词长度不能小于 1'],
+    maxlength: [50, '字典项关键词长度不能大于 50'],
   },
   // 名称
   dictionaryItemName: {
     type: String,
     required: true,
     trim: true,
-    minlength: [5, '字典项名称长度不能小于5'],
-    maxlength: [100, '字典项名称长度不能大于100']
+    minlength: [1, '字典项名称长度不能小于 1'],
+    maxlength: [100, '字典项名称长度不能大于 100']
   },
   // 关联 字典关键词
   dictionaryKey: {
@@ -40,8 +40,8 @@ const schemaDefinition = new mongoose.Schema({
   description: {
     type: String,
     default: '',
-    minlength: [0, '描述长度不能小于0'],
-    maxlength: [200, '描述长度不能大于200']
+    minlength: [0, '描述长度不能小于 0'],
+    maxlength: [200, '描述长度不能大于 200']
   }, 
   createdAt: {
     type: Date,

@@ -17,7 +17,7 @@ const schemaDefinition = new mongoose.Schema({
   dictionaryItemkey: {
     type: String,
     required: true,
-    unique: true,
+    unique: false, // 不同的字典之间的字典项的关键词可以重复
     trim: true,
     minlength: [1, '字典项关键词长度不能小于1'],
     maxlength: [50, '字典项关键词长度不能大于50'],

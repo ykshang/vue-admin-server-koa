@@ -1,3 +1,4 @@
+import logger from '@/utils/logger';
 import mongoose from 'mongoose'
 
 // 数据库连接配置
@@ -9,7 +10,7 @@ let isConnected = false
 // 封装连接函数
 const connectDB = async (): Promise<void> => {
   if (isConnected) {
-    console.log('💡 数据库已成功连接，无需重复连接')
+    logger.warn('数据库已成功连接，无需重复连接', '💡')
     return
   }
 
@@ -21,27 +22,27 @@ const connectDB = async (): Promise<void> => {
     })
 
     isConnected = true
-    console.log('数据库连接成功 ✔')
+    logger.info('数据库连接成功', '✅')
   } catch (err) {
-    console.error('❌ 数据库连接失败，错误信息：', err)
+    logger.error('数据库连接失败，错误信息：', err, '❌')
   }
 }
 
 // 监听连接事件
 mongoose.connection.on('connected', () => {
-  console.log('MongoDB client 已连接', '✔')
+  logger.info('MongoDB client 已连接', '✅')
 })
 
 mongoose.connection.on('error', (err) => {
-  console.error('❌ MongoDB client 检测到运行时错误：', err)
+  logger.error('MongoDB client 检测到运行时错误：', err, '❌')
 })
 
 mongoose.connection.on('disconnected', () => {
-  console.log('MongoDB client 连接已断开...', '🔗')
+  logger.error('MongoDB client 连接已断开...', '🧷')
   isConnected = false
 })
 mongoose.connection.on('reconnected', () => {
-  console.info('MongoDB client 重新连接成功...', '✔')
+  logger.info('MongoDB client 重新连接成功...', '✅')
 });
 
 // 导出连接函数和 mongoose 实例

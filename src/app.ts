@@ -9,6 +9,7 @@ import { connectDB } from "@/config/database";
 import errorHandler from '@/middlewares/errorHandler';
 import requestId from '@/middlewares/requestId';
 import loggerMiddleware from '@/middlewares/logger'; // 导入我们刚创建的日志中间件
+import logger from "./utils/logger";
 
 // 读取环境变量
 dotenv.config();
@@ -45,26 +46,26 @@ async function startServer() {
     // 启动时连接数据库
     await connectDB()
       .then(() => {
-        console.log("数据库连接已就绪", "✅");
+        logger.info("数据库连接已就绪", "✅");
       })
       .catch((err) => {
         retryCount ++;
         if (retryCount <= RETRY_COUNT) {
-          console.log(`正在重试第 ${retryCount} 次连接...`);
+          logger.info(`正在重试第 ${retryCount} 次连接...`);
           setTimeout(connectDB, 3000); // 5秒后重试
         } else {
-          console.error("❌ 数据库连接失败，已达到最大重试次数，退出应用...");
+          logger.error("❌ 数据库连接失败，已达到最大重试次数，退出应用...");
           process.exit(1);
         }
       });
-    console.log('正在启动 Koa 应用。。。', '🚀')
+    logger.info('正在启动 Koa 应用。。。', '🕘')
     // 获取服务器端口配置
     const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
     // 启动 Koa 服务器  
     app.listen(PORT, () => {
-      console.log('Koa 应用启动成功', "✅");
-      console.log(`服务根地址 ➡  http://localhost:${PORT}`, "🌐");
-      console.log(`服务健康检查点 ➡  http://localhost:${PORT}/api/health`, "🌐");
+      logger.info('Koa 应用启动成功', "✅");
+      logger.info(`服务根地址 ➡  http://localhost:${PORT}`, "🚀");
+      logger.info(`服务健康检查点 ➡  http://localhost:${PORT}/api/health`, "🚀");
     });
   } catch {
     // 重试连接

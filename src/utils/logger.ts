@@ -1,32 +1,34 @@
 import logger from "@/config/logger";
 
 function transformParames(args: any[]) {
-  let requestId = args.pop();
+  let reqId = args.pop();
+  let fileName = args.pop();
   let message = args
     .map((item) => (typeof item === "object" ? JSON.stringify(item) : item))
     .join(" ");
   return {
     message,
-    requestId: {
-      reqId: requestId,
+    context: {
+      reqId,
+      fileName
     },
   };
 }
 function error(...args: any[]) {
-  let { message, requestId } = transformParames(args);
-  logger.error(message, requestId);
+  let { message, context } = transformParames(args);
+  logger.error(message, context);
 }
 function info(...args: any[]) {
-  let { message, requestId } = transformParames(args);
-  logger.info(message, requestId);
+  let { message, context } = transformParames(args);
+  logger.info(message, context);
 }
 function debug(...args: any[]) {
-  let { message, requestId } = transformParames(args);
-  logger.debug(message, requestId);
+  let { message, context } = transformParames(args);
+  logger.debug(message, context);
 }
 function warn(...args: any[]) {
-  let { message, requestId } = transformParames(args);
-  logger.warn(message, requestId);
+  let { message, context } = transformParames(args);
+  logger.warn(message, context);
 }
 
 export default {

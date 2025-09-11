@@ -6,10 +6,11 @@ import path from "path";
 
 import router from "@/routers";
 import { connectDB } from "@/config/database";
-import errorHandler from "@/middlewares/errorHandler";
 import requestId from "@/middlewares/requestId";
+import errorHandler from "@/middlewares/errorHandler";
 import loggerMiddleware from "@/middlewares/logger"; // 导入我们刚创建的日志中间件
-import logger from "./utils/logger";
+import logger from "@/utils/logger";
+
 let fileName = "[app.ts]";
 
 // 读取环境变量

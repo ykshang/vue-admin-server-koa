@@ -1,0 +1,10 @@
+{
+  "[log]": {
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "indent",
+    "editor.tabSize": 4,
+    "editor.renderWhitespace": "all",
+    "editor.renderControlCharacters": true,
+    "editor.detectIndentation": true,
+  },
+}

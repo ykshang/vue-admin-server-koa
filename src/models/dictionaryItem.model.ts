@@ -2,7 +2,7 @@ import mongoose, { Document } from "mongoose";
 import { extFieldDocument } from "@/types/base";
 
 // 定义用户接口
-export interface DictionaryInterface extends extFieldDocument, Document {
+export interface DictionaryItemInterface extends extFieldDocument, Document {
   dictionaryItemkey: string;
   dictionaryItemName: string;
   dictionaryKey: string; // 关联 字典关键词
@@ -34,8 +34,6 @@ const schemaDefinition = new mongoose.Schema({
   dictionaryKey: {
     type: String,
     required: true, 
-    unique: true,
-    ref: 'dictionary',
     trim: true,
     minlength: [3, '字典关键词长度不能小于3'],
     maxlength: [50, '字典关键词长度不能大于50'],

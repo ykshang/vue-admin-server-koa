@@ -19,11 +19,7 @@ export default async function (ctx: Context) {
   let dictResult = await DictionaryService.findOneDictionary({
     dictionaryKey: request.dictionaryKey,
   });
-  logger.debug(
-    'createDictionaryItemControllers, findOneDictionary.result：',
-    dictResult,
-    CTX_REQ_ID
-  );
+  logger.debug('createDictionaryItemControllers, findOneDictionary.result：', dictResult, CTX_REQ_ID);
   // 不存在则返回错误
   if (!dictResult || !dictResult._id) {
     throw {
@@ -32,9 +28,19 @@ export default async function (ctx: Context) {
       success: false,
     };
   }
+  // 创建字典项
+  let result = await DictionaryService.createDictionaryItem({
+    dictionaryItemkey: request.dictionaryItemkey,
+    dictionaryItemName: request.dictionaryItemName,
+    dictionaryKey: request.dictionaryKey,
+    description: request.description,
+  }, CTX_REQ_ID)
+  logger.debug('createDictionaryItemControllers, result：', result, CTX_REQ_ID);
   // 存在则调用服务创建字典项
   ctx.body = {
+    code: 200,
     success: true,
     message: "创建字典项成功",
+    result: result,
   };
 }

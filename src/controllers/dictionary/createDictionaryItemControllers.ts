@@ -1,4 +1,5 @@
-import logger from "@/utils/logger";
+import logger from "@/utils/logger"; // 导入我们刚创建的logger
+
 import { Context } from "koa";
 import DictionaryService from "@/services/dictionary";
 
@@ -10,19 +11,19 @@ interface CreateDictionaryItemRequest {
 }
 
 export default async function (ctx: Context) {
+  let CTX_REQ_ID =  ctx.requestId;
   let request = ctx.request.body as CreateDictionaryItemRequest;
-  logger.info(
-    `createDictionaryItemControllers, request: ${JSON.stringify(request)}`
-  );
+  // console.log('reqId', ctx.requestId);
+  logger.info(`createDictionaryItemControllers, request:`, request,12424234234, CTX_REQ_ID);
   // 调用服务检查 dictionaryKey 是否存在
   let dictResult = await DictionaryService.findOneDictionary({
     dictionaryKey: request.dictionaryKey,
   });
-  logger.info(
-    `createDictionaryItemControllers, findOneDictionary.result: ${JSON.stringify(
-      dictResult
-    )}`
-  );
+  // logger.info(
+  //   `createDictionaryItemControllers, findOneDictionary.result: ${JSON.stringify(
+  //     dictResult
+  //   )}`
+  // );
   if (!dictResult || !dictResult.success) {
     throw {
       code: 400,

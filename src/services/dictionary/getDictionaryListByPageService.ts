@@ -1,7 +1,8 @@
 import DictionaryModel from "@/models/dictionary.model";
+// let fileName = '[Service] [getDictionaryListByPage.ts]';
 
 export default async function getDictionaryListByPageService(request: any) {
-  // console.log("getDictionaryListByPageService, ctx:", request);
+  // console.log("getDictionaryListByPageService, ctx:", fileName, request);
   const { pageNum, pageSize, dictionaryKey } = request;
   let params: {
     dictionaryKey?: RegExp;

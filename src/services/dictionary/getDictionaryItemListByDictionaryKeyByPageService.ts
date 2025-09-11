@@ -1,8 +1,10 @@
 import logger from "@/utils/logger";
 import DictionaryItemModel from "@/models/dictionaryItem.model";
 
+let fileName = '[Service] [getDictionaryItemListByDictionaryKeyByPageService.ts]';
+
 export default async function(request: any, CTX_REQ_ID?: string) {
-  logger.debug('getDictionaryItemListByDictionaryKeyService, 请求参数：', request, CTX_REQ_ID);
+  logger.debug('请求参数：', request, fileName, CTX_REQ_ID);
   const { pageNum, pageSize, dictionaryKey } = request;
   let params = {
     dictionaryKey: dictionaryKey

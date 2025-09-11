@@ -1,5 +1,8 @@
 import { Context } from "koa";
 import DictionaryService from "@/services/dictionary";
+
+// let fileName = '[Controller] [getDictionaryListByPageControllers.ts]';
+
 interface ReqType {
   pageNum: number;
   pageSize: number;
@@ -7,13 +10,11 @@ interface ReqType {
 }
 export default async function getDictionaryListByPage(ctx: Context) {
   let request = ctx.request.body as ReqType;
-  // console.log("getDictionaryListByPageController, ctx:", request);
   let { isChecked, errMessage } = businessValidate(request);
   if (!isChecked) {
     throw errMessage;
   }
   let result = await DictionaryService.getDictionaryListByPage(request);
-  // console.log('getDictionaryListByPageController, result:', result);
   ctx.body = {
     code: 200,
     success: true,

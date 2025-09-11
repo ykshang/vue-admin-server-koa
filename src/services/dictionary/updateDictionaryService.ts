@@ -1,5 +1,7 @@
 import DictionaryModel from "@/models/dictionary.model";
 
+// let fileName = '[Service] [updateDictionaryService.ts]';
+
 export default async function (request: any) {
   // console.log('请求体', request)
   const result = await DictionaryModel.findOneAndUpdate(
@@ -14,7 +16,5 @@ export default async function (request: any) {
     },
     { new: true, runValidators: true }
   );
-  // console.log('更新后:', updatedUser);
-
   return result;
 }

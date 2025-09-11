@@ -6,10 +6,11 @@ import path from "path";
 
 import router from "@/routers";
 import { connectDB } from "@/config/database";
-import errorHandler from '@/middlewares/errorHandler';
-import requestId from '@/middlewares/requestId';
-import loggerMiddleware from '@/middlewares/logger'; // 导入我们刚创建的日志中间件
+import errorHandler from "@/middlewares/errorHandler";
+import requestId from "@/middlewares/requestId";
+import loggerMiddleware from "@/middlewares/logger"; // 导入我们刚创建的日志中间件
 import logger from "./utils/logger";
+let fileName = "[app.ts]";
 
 // 读取环境变量
 dotenv.config();
@@ -40,32 +41,42 @@ app.use(router.allowedMethods());
 async function startServer() {
   try {
     // 获取最大重试次数
-    const RETRY_COUNT = process.env.RETRY_COUNT ? parseInt(process.env.RETRY_COUNT, 10) : 5;
+    const RETRY_COUNT = process.env.RETRY_COUNT
+      ? parseInt(process.env.RETRY_COUNT, 10)
+      : 5;
 
     let retryCount = 0;
     // 启动时连接数据库
     await connectDB()
       .then(() => {
-        logger.info("数据库连接已就绪", "✅");
+        logger.info("数据库连接已就绪", fileName, "✅");
       })
       .catch((err) => {
-        retryCount ++;
+        retryCount++;
         if (retryCount <= RETRY_COUNT) {
-          logger.info(`正在重试第 ${retryCount} 次连接...`);
+          logger.info(`正在重试第 ${retryCount} 次连接`, fileName, "✅");
           setTimeout(connectDB, 3000); // 5秒后重试
         } else {
-          logger.error("❌ 数据库连接失败，已达到最大重试次数，退出应用...");
+          logger.error(
+            "数据库连接失败，已达到最大重试次数，退出应用...",
+            fileName,
+            "❌"
+          );
           process.exit(1);
         }
       });
-    logger.info('正在启动 Koa 应用。。。', '🕘')
+    logger.info("正在启动 Koa 应用。。。", fileName, "🕘");
     // 获取服务器端口配置
     const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-    // 启动 Koa 服务器  
+    // 启动 Koa 服务器
     app.listen(PORT, () => {
-      logger.info('Koa 应用启动成功', "✅");
-      logger.info(`服务根地址 ➡  http://localhost:${PORT}`, "🚀");
-      logger.info(`服务健康检查点 ➡  http://localhost:${PORT}/api/health`, "🚀");
+      logger.info("Koa 应用启动成功", "✅");
+      logger.info(`服务根地址 ➡  http://localhost:${PORT}`, fileName, "🚀");
+      logger.info(
+        `服务健康检查点 ➡  http://localhost:${PORT}/api/health`,
+        fileName,
+        "🚀"
+      );
     });
   } catch {
     // 重试连接

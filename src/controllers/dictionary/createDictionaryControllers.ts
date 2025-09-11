@@ -1,11 +1,11 @@
 import { Context } from "koa";
 import DictionaryService from "@/services/dictionary";
 
+// let fileName = '[Controller] [createDictionaryControllers.ts]';
+
 export default async function(ctx: Context) {
   let request = ctx.request.body;
-  // console.log("createDictionaryController, request:", request);
   let result = await DictionaryService.createDictionary(request);
-  // console.log("createDictionary, err:", err);
   ctx.body = {
     code: 200,
     success: true,

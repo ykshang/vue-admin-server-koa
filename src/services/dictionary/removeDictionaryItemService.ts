@@ -1,4 +1,6 @@
-export default async function removeDictionaryService(request: any) {
+// let fileName = '[Service] [removeDictionaryItemService.ts]';
+
+export default async function removeDictionaryItemService(request: any) {
   console.log(request)
   return {
     success: true,

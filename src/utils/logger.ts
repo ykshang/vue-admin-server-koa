@@ -11,7 +11,7 @@ const requestAwareFormat = winston.format.printf(
 
 // 创建 logger 实例
 const logger = winston.createLogger({
-  level: "info", // 日志级别
+  level: "debug", // 日志级别 error/warn/info/debug
   format: winston.format.combine(
     winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss.SSS" }), // 添加时间戳
     winston.format.colorize(), // 开发环境可彩色化
@@ -37,12 +37,27 @@ function transformParames(args: any[]) {
     }
   }
 }
-export function info(...args: any[]) {
+function error(...args: any[]) {
+  let { message, requestId }= transformParames(args)
+  logger.error(message, requestId);
+}
+function info(...args: any[]) {
   let { message, requestId }= transformParames(args)
   logger.info(message, requestId);
+}
+function debug(...args: any[]) {
+  let { message, requestId }= transformParames(args)
+  logger.debug(message, requestId);
+}
+function warn(...args: any[]) {
+  let { message, requestId }= transformParames(args)
+  logger.warn(message, requestId);
 }
 
 export default {
   info,
+  error,
+  debug,
+  warn,
 };
 

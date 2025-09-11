@@ -1,7 +1,4 @@
 node_modules/*
-logs/combined.log
-logs/error.log
-logs/debug.log
-src/logs/app*.log
-src/logs/*.json
-src/logs/app*.log.gz
+logs/app*.log
+logs/*.json
+logs/app*.log.gz

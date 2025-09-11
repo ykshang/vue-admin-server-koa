@@ -24,7 +24,7 @@ const logger = winston.createLogger({
     new winston.transports.Console(),
     // 生产环境可以同时输出到文件
     new DailyRotateFile({
-      filename: 'src/logs/app-%DATE%.log',
+      filename: 'logs/app-%DATE%.log',
       datePattern: 'YYYY-MM-DD',
       zippedArchive: true,
       maxSize: '10m',

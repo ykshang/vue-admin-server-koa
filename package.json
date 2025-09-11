@@ -31,7 +31,8 @@
     "mongoose": "^8.18.0",
     "nodemon": "^3.1.10",
     "uuid": "^13.0.0",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "@types/koa": "^3.0.0",

@@ -11,7 +11,8 @@ const requestAwareFormat = winston.format.printf(
 
 // 创建 logger 实例
 const logger = winston.createLogger({
-  level: "debug", // 日志级别 error/warn/info/debug
+  // level: "debug", // 日志级别 error/warn/info/debug
+  level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
   format: winston.format.combine(
     winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss.SSS" }), // 添加时间戳
     winston.format.colorize(), // 开发环境可彩色化

@@ -4,3 +4,4 @@ logs/error.log
 logs/debug.log
 src/logs/app*.log
 src/logs/*.json
+src/logs/app*.log.gz

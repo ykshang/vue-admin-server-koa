@@ -11,7 +11,7 @@ router.post('/updateDictionary', dictionaryController.updateDictionary)
 
 // 字典项相关
 router.post('/createDictionaryItem', dictionaryController.createDictionaryItem)
-router.post('/getDictionaryItemList', dictionaryController.getDictionaryItemList)
+router.post('/getDictionaryItemListByDictionaryKeyByPage', dictionaryController.getDictionaryItemListByDictionaryKeyByPage)
 router.post('/removeDictionaryItem', dictionaryController.removeDictionaryItem)
 
 export default router

@@ -22,7 +22,7 @@ const logger = winston.createLogger({
     new winston.transports.Console(),
     // 生产环境可以同时输出到文件
     new winston.transports.File({
-      filename: "logs/app.log",
+      filename: "src/logs/app.log",
       format: winston.format.combine(
         winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss.SSS" }), // 添加时间戳
         winston.format.uncolorize(), // 开发环境可彩色化

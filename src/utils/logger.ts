@@ -3,8 +3,7 @@ import winston from "winston";
 
 // 定义自定义日志格式，添加时间戳和请求ID（如果存在）
 const requestAwareFormat = winston.format.printf(
-  ({ level, message, timestamp, reqId }) => {
-    console.log('reqIdreqIdreqId', reqId);
+  ({ level, timestamp, message, reqId }) => {
     const reqIdPart = reqId ? `[${reqId}] ` : ""; // 体现日志来源：通过请求ID
     return `${timestamp} ${level}: ${reqIdPart}${message}`;
   }
@@ -28,5 +27,22 @@ const logger = winston.createLogger({
     }),
   ],
 });
+function transformParames(args: any[]) {
+  let requestId = args.pop();
+  let message = args.map(item=> typeof item === 'object'? JSON.stringify(item): item).join(' ');
+  return {
+    message,
+    requestId: {
+      reqId: requestId
+    }
+  }
+}
+export function info(...args: any[]) {
+  let { message, requestId }= transformParames(args)
+  logger.info(message, requestId);
+}
 
-export default logger;
+export default {
+  info,
+};
+

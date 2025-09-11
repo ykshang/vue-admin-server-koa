@@ -9,17 +9,31 @@ interface CreateDictionaryItemRequest {
   description?: string;
 }
 
-export default async function(ctx: Context) {
+export default async function (ctx: Context) {
   let request = ctx.request.body as CreateDictionaryItemRequest;
-  logger.info(`createDictionaryItemControllers, request: ${JSON.stringify(request)}`);
+  logger.info(
+    `createDictionaryItemControllers, request: ${JSON.stringify(request)}`
+  );
   // 调用服务检查 dictionaryKey 是否存在
   let dictResult = await DictionaryService.findOneDictionary({
     dictionaryKey: request.dictionaryKey,
-  })
+  });
+  logger.info(
+    `createDictionaryItemControllers, findOneDictionary.result: ${JSON.stringify(
+      dictResult
+    )}`
+  );
+  if (!dictResult || !dictResult.success) {
+    throw {
+      code: 400,
+      message: "字典项目不存在：" + request.dictionaryKey,
+      success: false,
+    };
+  }
   // 不存在则返回错误
   // 存在则调用服务创建字典项
-  return ctx.body = {
+  return (ctx.body = {
     success: true,
-    message: '创建字典项成功',
-  }
+    message: "创建字典项成功",
+  });
 }

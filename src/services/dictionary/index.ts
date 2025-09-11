@@ -6,6 +6,7 @@ import removeDictionary from './removeDictionaryService'
 import removeDictionaryItem from './removeDictionaryItemService'
 import updateDictionary from './updateDictionaryService'
 import findOneDictionary from './findOneDictionaryService'
+import updateDictionaryItem from './updateDictionaryItemService'
 
 export default {
   createDictionary,
@@ -16,4 +17,5 @@ export default {
   removeDictionaryItem,
   updateDictionary,
   findOneDictionary,
+  updateDictionaryItem,
 }

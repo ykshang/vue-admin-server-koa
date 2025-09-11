@@ -13,5 +13,8 @@ router.post('/updateDictionary', dictionaryController.updateDictionary)
 router.post('/createDictionaryItem', dictionaryController.createDictionaryItem)
 router.post('/getDictionaryItemListByDictionaryKeyByPage', dictionaryController.getDictionaryItemListByDictionaryKeyByPage)
 router.post('/removeDictionaryItem', dictionaryController.removeDictionaryItem)
+router.post('/updateDictionaryItem', dictionaryController.updateDictionaryItem)
+
+
 
 export default router

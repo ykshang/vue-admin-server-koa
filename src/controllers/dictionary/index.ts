@@ -5,6 +5,7 @@ import getDictionaryListByPage from "./getDictionaryListByPageControllers";
 import removeDictionary from "./removeDictionaryControllers";
 import removeDictionaryItem from "./removeDictionaryItemControllers";
 import updateDictionary from "./updateDictionaryControllers";
+import updateDictionaryItem from "./updateDictionaryItemControllers";
 
 export default {
   createDictionary,
@@ -14,4 +15,5 @@ export default {
   removeDictionary,
   removeDictionaryItem,
   updateDictionary,
+  updateDictionaryItem,
 }

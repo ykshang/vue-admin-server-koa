@@ -30,8 +30,7 @@ const logger = winston.createLogger({
       maxSize: '10m',
       maxFiles: '30d',
       format: winston.format.combine(
-        winston.format.uncolorize(),
-        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' })
+        winston.format.uncolorize(), // 确保文件日志不包含颜色
       )
     })
   ],

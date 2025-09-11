@@ -19,32 +19,27 @@ const schemaDefinition = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
-    minlength: [3, '字典关键词长度不能小于3'],
-    maxlength: [50, '字典关键词长度不能大于50'],
+    minlength: [1, '字典项关键词长度不能小于1'],
+    maxlength: [50, '字典项关键词长度不能大于50'],
   },
   // 名称
   dictionaryItemName: {
     type: String,
     required: true,
     trim: true,
-    minlength: [5, '字典名称长度不能小于5'],
-    maxlength: [100, '字典名称长度不能大于100']
+    minlength: [5, '字典项名称长度不能小于5'],
+    maxlength: [100, '字典项名称长度不能大于100']
   },
   // 关联 字典关键词
   dictionaryKey: {
     type: String,
     required: true, 
     trim: true,
-    minlength: [3, '字典关键词长度不能小于3'],
-    maxlength: [50, '字典关键词长度不能大于50'],
   }, 
   // 描述
   description: {
     type: String,
     default: '',
-    required: false,
-    unique: false,
-    trim: true,
     minlength: [0, '描述长度不能小于0'],
     maxlength: [200, '描述长度不能大于200']
   }, 

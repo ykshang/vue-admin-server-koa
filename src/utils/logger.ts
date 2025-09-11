@@ -1,5 +1,6 @@
 // logger.ts
 import winston from "winston";
+import DailyRotateFile from 'winston-daily-rotate-file';
 
 // 定义自定义日志格式，添加时间戳和请求ID（如果存在）
 const requestAwareFormat = winston.format.printf(
@@ -22,11 +23,20 @@ const logger = winston.createLogger({
     // 输出到控制台
     new winston.transports.Console(),
     // 生产环境可以同时输出到文件
-    new winston.transports.File({
-      filename: "src/logs/app.log",
-      format: winston.format.uncolorize(),
-    }),
+    new DailyRotateFile({
+      filename: 'src/logs/app-%DATE%.log',
+      datePattern: 'YYYY-MM-DD',
+      zippedArchive: true,
+      maxSize: '20m',
+      maxFiles: '30d',
+      format: winston.format.combine(
+        winston.format.uncolorize(),
+        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' })
+      )
+    })
   ],
+  handleExceptions: true,
+  handleRejections: true,
 });
 function transformParames(args: any[]) {
   let requestId = args.pop();

@@ -1,6 +1,6 @@
 node_modules/*
-logs/app.log
-src/logs/app.log
 logs/combined.log
 logs/error.log
 logs/debug.log
+src/logs/app*.log
+src/logs/*.json

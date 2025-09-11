@@ -20,7 +20,7 @@ export default async function (ctx: Context) {
     dictionaryKey: request.dictionaryKey,
   });
   logger.debug(
-    `createDictionaryItemControllers, findOneDictionary.result:`,
+    'createDictionaryItemControllers, findOneDictionary.result：',
     dictResult,
     CTX_REQ_ID
   );

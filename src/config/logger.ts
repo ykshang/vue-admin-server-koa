@@ -5,7 +5,7 @@ import {ANSI_CODES, colorizeText } from '@/utils/colorizeText';
 
 // 定义自定义日志格式，添加时间戳和请求ID（如果存在）
 const requestAwareFormat = winston.format.printf(
-  ({ level, timestamp, reqId, message, fileName, context, ...args }) => {
+  ({ level, timestamp, reqId, message, fileName }) => {
     const fileNamePart = fileName ? colorizeText(fileName as string, ANSI_CODES.yellow) : "";
     const reqIdPart = reqId ? `[${reqId}] ` : ""; // 体现日志来源：通过请求ID
     return `${timestamp} ${level}: ${reqIdPart}${message} ${fileNamePart}`;

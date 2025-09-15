@@ -3,14 +3,27 @@ import logger from "@/config/logger";
 function transformParames(args: any[]) {
   let reqId = args.pop();
   let fileName = args.pop();
+  // 如果是json需要序列化
+  // 如果是正则表达式直接打印
+  // 否则直接打印
   let message = args
-    .map((item) => (typeof item === "object" ? JSON.stringify(item) : item))
+    .map((item) =>
+      typeof item === "object"
+        ? JSON.stringify(item, (key, value) => {
+            if (value instanceof RegExp) {
+              console.log("RegExp", value);
+              return `RegExp(${value.source}, ${value.flags})`;
+            }
+            return value;
+          })
+        : item
+    )
     .join(" ");
   return {
     message,
     context: {
       reqId,
-      fileName
+      fileName,
     },
   };
 }

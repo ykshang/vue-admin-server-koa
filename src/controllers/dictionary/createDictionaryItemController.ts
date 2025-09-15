@@ -15,7 +15,6 @@ interface CreateDictionaryItemRequest {
 export default async function (ctx: Context) {
   let CTX_REQ_ID = ctx.requestId;
   let request = ctx.request.body as CreateDictionaryItemRequest;
-  // console.log('reqId', ctx.requestId);
   logger.debug(
     `createDictionaryItemControllers, request:`,
     request,

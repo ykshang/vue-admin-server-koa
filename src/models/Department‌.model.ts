@@ -28,7 +28,7 @@ const schemaDefinition = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minlength: [5, "部门名称长度不能小于5"],
+    minlength: [2, "部门名称长度不能小于2"],
     maxlength: [100, "部门名称长度不能大于100"],
   },
   // 上级部门编码

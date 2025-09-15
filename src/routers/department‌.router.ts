@@ -1,10 +1,10 @@
 import Router from '@koa/router';
-import departmentController from '@/controllers/department' 
+import departmentController from '@/controllers/department‌' 
 
 const router = new Router({ prefix: '/department' })
 
 // 部门相关
-router.post('/createDepartment', departmentController.createDepartment)
+router.post('/createDepartment', departmentController.createDepartment‌)
 
 
 

@@ -17,7 +17,7 @@ export default async function(ctx: Context) {
     fileName,
     CTX_REQ_ID
   );
-  request.departmentCode = request.parentDepartmentCode;
+  // request.parentDepartmentCode = 'root';
   let result = await DepartmentService.createDepartment‌(request);
   ctx.body = {
     code: 200,

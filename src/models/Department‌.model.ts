@@ -33,7 +33,7 @@ const schemaDefinition = new mongoose.Schema({
   },
   // 上级部门编码
   parentDepartmentCode: {
-    type: Number,
+    type: String,
     required: true,
     trim: true,
     minlength: [4, "上级部门编码长度不能小于4"],

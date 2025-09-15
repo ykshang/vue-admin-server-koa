@@ -11,8 +11,8 @@ function transformParames(args: any[]) {
       typeof item === "object"
         ? JSON.stringify(item, (key, value) => {
             if (value instanceof RegExp) {
-              console.log("RegExp", value);
-              return `RegExp(${value.source}, ${value.flags})`;
+              // console.log("RegExp", value);
+              return `RegExp(/${value.source}/${value.flags})`;
             }
             return value;
           })

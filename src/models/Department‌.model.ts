@@ -5,6 +5,7 @@ import mongoose, { Document } from "mongoose";
 export interface DepartmentInterface extends extFieldDocument, Document {
   departmentCode: string;
   departmentName: string;
+  departmentShortName: string;
   parentDepartmentCode: string;
   departmentLevel: number;
   description?: string;
@@ -25,6 +26,14 @@ const schemaDefinition = new mongoose.Schema({
   },
   // 部门名称
   departmentName: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: [2, "部门名称长度不能小于2"],
+    maxlength: [100, "部门名称长度不能大于100"],
+  },
+    // 部门名称
+  departmentShortName: {
     type: String,
     required: true,
     trim: true,

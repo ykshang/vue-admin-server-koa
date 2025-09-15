@@ -8,7 +8,7 @@ export default async function mainService(request: any, CTX_REQ_ID?: string) {
   const { departmentName } = request;
 
   logger.debug(`mainService, request:`, request, fileName, CTX_REQ_ID);
-  
+
   let params: {
     departmentName?: RegExp;
     parentDepartmentCode?: string;
@@ -18,7 +18,7 @@ export default async function mainService(request: any, CTX_REQ_ID?: string) {
     params.departmentName = new RegExp(departmentName);
   } else {
     // 否则只查询根部门
-    params.parentDepartmentCode = "root";
+    params.parentDepartmentCode = "00000000000000000000";
   }
   logger.debug(`mainService, params:`, params, fileName, CTX_REQ_ID);
 

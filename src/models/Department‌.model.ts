@@ -3,10 +3,9 @@ import mongoose, { Document } from "mongoose";
 
 // 定义用户接口
 export interface DictionaryInterface extends extFieldDocument, Document {
-  departmentId: number;
   departmentCode: string;
   departmentName: string;
-  parentDepartmentId: number;
+  parentDepartmentCode: string;
   departmentLevel: number;
   description?: string;
   createdAt?: Date;
@@ -15,15 +14,6 @@ export interface DictionaryInterface extends extFieldDocument, Document {
 
 // 定义用户模型
 const schemaDefinition = new mongoose.Schema({
-  // 部门ID
-  departmentId: {
-    type: Number,
-    required: true,
-    unique: true,
-    trim: true,
-    minlength: [4, "部门ID长度不能小于4"],
-    maxlength: [50, "部门ID长度不能大于50"],
-  },
   // 部门编码
   departmentCode: {
     type: String,
@@ -42,7 +32,7 @@ const schemaDefinition = new mongoose.Schema({
     maxlength: [100, "部门名称长度不能大于100"],
   },
   // 上级部门编码
-  parentDepartmentId: {
+  parentDepartmentCode: {
     type: Number,
     required: true,
     trim: true,

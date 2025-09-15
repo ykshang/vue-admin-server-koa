@@ -18,7 +18,7 @@ const schemaDefinition = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
-    minlength: [3, '字典关键词长度不能小于3'],
+    minlength: [1, '字典关键词长度不能小于1'],
     maxlength: [50, '字典关键词长度不能大于50'],
   },
   // 字典名称
@@ -26,7 +26,7 @@ const schemaDefinition = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minlength: [5, '字典名称长度不能小于5'],
+    minlength: [1, '字典名称长度不能小于1'],
     maxlength: [100, '字典名称长度不能大于100']
   },
   // 描述

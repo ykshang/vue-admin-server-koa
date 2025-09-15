@@ -16,6 +16,7 @@ export default function generateNewDepartmentCode(
     last = temp < 10 ? "0" + temp : temp.toString();
     tempCodeList.push(last);
   }
+  let result = tempCodeList.join("") + '00000000000000000000'
   // 生成新的部门编码
-  return tempCodeList.join("");
+  return result.slice(0, 20);
 }

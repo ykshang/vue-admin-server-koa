@@ -7,12 +7,14 @@ let fileName = "[Service] [mainService.ts]";
 export default async function mainService(request: any, CTX_REQ_ID?: string) {
   const { departmentName } = request;
 
+  logger.debug(`mainService, request:`, request, fileName, CTX_REQ_ID);
+  
   let params: {
     departmentName?: RegExp;
     parentDepartmentCode?: string;
   } = {};
-  // 如果传入部门名，根据部门名查询
   if (departmentName) {
+    // 如果传入部门名，根据部门名查询
     params.departmentName = new RegExp(departmentName);
   } else {
     // 否则只查询根部门

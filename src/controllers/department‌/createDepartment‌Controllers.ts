@@ -1,5 +1,7 @@
 import logger from "@/utils/logger"; // 导入我们刚创建的logger
 
+import type { DepartmentInterface } from '@/models/Department‌.model'
+
 import { Context } from "koa";
 import DepartmentService from "@/services/department‌";
 
@@ -7,7 +9,7 @@ let fileName = '[Controller] [createDepartment‌Controllers.ts]';
 
 export default async function(ctx: Context) {
   let CTX_REQ_ID = ctx.requestId;
-  let request = ctx.request.body;
+  let request = ctx.request.body as DepartmentInterface;
 
   logger.debug(
     `createDepartment‌Controllers, request:`,
@@ -15,6 +17,7 @@ export default async function(ctx: Context) {
     fileName,
     CTX_REQ_ID
   );
+  request.departmentCode = request.parentDepartmentCode;
   let result = await DepartmentService.createDepartment‌(request);
   ctx.body = {
     code: 200,

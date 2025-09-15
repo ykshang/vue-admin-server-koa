@@ -2,7 +2,7 @@ import { extFieldDocument } from "@/types/base";
 import mongoose, { Document } from "mongoose";
 
 // 定义用户接口
-export interface DictionaryInterface extends extFieldDocument, Document {
+export interface DepartmentInterface extends extFieldDocument, Document {
   departmentCode: string;
   departmentName: string;
   parentDepartmentCode: string;

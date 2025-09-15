@@ -1,3 +1,9 @@
+/**
+ * 生成新的部门编码
+ * @param departmentCode 部门编码
+ * @param isParent 是否传入的是父部门编码
+ * @returns 新的部门编码
+ */
 export default function generateNewDepartmentCode(
   departmentCode: string,
   isParent: boolean

@@ -3,7 +3,6 @@ import DepartmentModel from "@/models/Department‌.model";
 
 export default async function getDepartment‌ListService(request: any) {
   const { parentDepartmentCode } = request;
-  console.log("12312312311", parentDepartmentCode)
   let resul = await DepartmentModel.find({
     parentDepartmentCode: parentDepartmentCode
   }).sort({ updatedAt: "desc" })

@@ -12,7 +12,9 @@ export default async function getDictionaryListByPage(ctx: Context) {
   let request = ctx.request.body as ReqType;
   let { isChecked, errMessage } = businessValidate(request);
   if (!isChecked) {
-    throw errMessage;
+    ctx.throw(400, {
+      message: errMessage,
+    });
   }
   let result = await DictionaryService.getDictionaryListByPage(request);
   ctx.body = {
@@ -25,14 +27,10 @@ export default async function getDictionaryListByPage(ctx: Context) {
 function businessValidate(params: ReqType) {
   let { pageNum, pageSize } = params;
   let isChecked = true;
-  let errMessage = {};
+  let errMessage = "";
   if (!pageNum || !pageSize) {
     isChecked = false;
-    errMessage = {
-      code: 400,
-      success: false,
-      message: "分页参数错误",
-    };
+    errMessage = "分页参数错误";
   }
   return {
     isChecked,

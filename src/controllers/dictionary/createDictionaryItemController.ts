@@ -33,11 +33,9 @@ export default async function (ctx: Context) {
   );
   // 不存在则返回错误
   if (!dictResult || !dictResult._id) {
-    throw {
-      code: 400,
+    ctx.throw(400, {
       message: "字典不存在：" + request.dictionaryKey,
-      success: false,
-    };
+    });
   }
   // 创建字典项
   let result = await DictionaryService.createDictionaryItem(

@@ -25,11 +25,14 @@ export default async function(ctx: Context, next: () => Promise<any>) {
     }
     // 其他未处理错误
     else {
+      console.log('未处理错误:', err.code);
+      // 修复：保留原始错误状态码，仅在没有状态码时设为500
       ctx.status = err.status || 500;
       ctx.body = {
         success: false,
-        code: err.code || 500,
-        message: err.message || '服务器内部错误'
+        code: err.code || err.status || 500,
+        message: err.message || '服务器内部错误',
+        result: err.result || null,
       };
     }
     ctx.app.emit('error', err, ctx);

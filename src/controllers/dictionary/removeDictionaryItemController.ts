@@ -18,10 +18,9 @@ export default async function removeDictionaryItem(ctx: Context) {
       data: result,
     }
   } else {
-    throw {
-      code: 500,
-      success: false,
-      message: '删除字典项失败:' + JSON.stringify(result),
-    }
+    ctx.throw(400, {
+      message: '删除字典项失败',
+      result: result,
+    });
   }
 }

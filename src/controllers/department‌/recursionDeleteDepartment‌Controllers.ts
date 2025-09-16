@@ -30,11 +30,9 @@ export default async function recursionDeleteDepartment‌Controllers(ctx: Conte
       result: result,
     };
   } else {
-    throw {
-      code: 500,
-      success: false,
+    ctx.throw(400, {
       message: "删除失败：" + JSON.stringify(result),
       result: result,
-    }
+    });
   }
 }

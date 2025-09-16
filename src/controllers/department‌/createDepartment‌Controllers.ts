@@ -8,6 +8,13 @@ import generateNewDepartmentCode from "@/utils/generateNewDepartmentCode";
 
 let fileName = "[Controller] [createDepartment‌Controllers.ts]";
 
+/**
+ * 创建部门
+ * @description 创建部门，根据父层部门编码，以及是否存在同级兄弟部门，来生成递增的部门编码，然后创建部门
+ * @param {Context} ctx Koa 上下文对象
+ * @returns void 无返回值
+ */
+
 export default async function (ctx: Context) {
   let CTX_REQ_ID = ctx.requestId;
   let request = ctx.request.body as DepartmentInterface;

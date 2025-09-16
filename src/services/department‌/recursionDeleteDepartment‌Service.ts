@@ -4,14 +4,13 @@ import logger from "@/utils/logger"; // 导入我们刚创建的logger
 let fileName = '[Service] [recursionDeleteDepartment‌Service.ts]';
 export default async function deleteDepartment‌Service(departmentCode: string, CTX_REQ_ID?: string) {
   logger.debug("要删除的部门：", departmentCode, fileName, CTX_REQ_ID);
-  const codeList = departmentCode.split('');
-  let tempCode = []
-  while (codeList.length > 0) {
-    tempCode.push(codeList.splice(0,2).join(""));
+  // 组装部门前缀
+  let code = departmentCode
+  while (code.endsWith('00')) {
+    code = code.slice(0, -2)
   }
-  tempCode = tempCode.filter(item => item !== '00');
   let params = {
-    departmentCode: { $regex: new RegExp(`^${tempCode.join("")}`) } 
+    departmentCode: { $regex: new RegExp(`^${code}`) } 
   }
   let result = await Department‌Model.deleteMany(params);
   logger.debug("部门的递归删除结果：", result, fileName, CTX_REQ_ID);

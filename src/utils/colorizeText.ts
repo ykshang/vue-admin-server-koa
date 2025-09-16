@@ -1,4 +1,7 @@
-// 定义一些常用的 ANSI 颜色代码
+/**
+ * 颜色代码映射
+ * @description 颜色代码，用于日志输出
+ */
 export const ANSI_CODES = {
   reset: '\x1b[0m',
   bright: '\x1b[1m',
@@ -9,8 +12,13 @@ export const ANSI_CODES = {
   magenta: '\x1b[35m',
   cyan: '\x1b[36m',
 };
-
-// 创建一个自定义函数来为文字着色，用于日志输出
+/**
+ * 颜色化文本
+ * @description 为文本添加颜色，用于日志输出
+ * @param text 要颜色化的文本
+ * @param colorCode 颜色代码
+ * @returns 颜色化后的文本
+ */
 export function colorizeText(text: string, colorCode: string): string {
   // 检查输出环境是否支持颜色（例如，避免在文件输出中写入颜色代码）
   // 这是一个简单的检查，在实际项目中你可能需要更复杂的逻辑来判断 transport 的类型

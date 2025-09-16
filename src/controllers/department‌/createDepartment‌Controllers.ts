@@ -32,10 +32,31 @@ export default async function (ctx: Context) {
   logger.debug("同层的兄弟部门：", departmentList, fileName, CTX_REQ_ID);
   let tempCode = request.parentDepartmentCode
   if (departmentList.length > 0) {
+    // 校验部门名称和简称是否已经存在于同级部门下
+    const departmentNameList: string[] = []
+    const departmentShortNameList: string[] = []
+    departmentList.forEach(item => {
+      departmentNameList.push(item.departmentName)
+      departmentShortNameList.push(item.departmentShortName)
+    })
+    if (departmentNameList.includes(request.departmentName)) {
+      ctx.throw(400, {
+        message: "该部门已被创建：" + request.departmentName,
+      })
+      return
+    }
+    if (departmentShortNameList.includes(request.departmentShortName)) {
+      ctx.throw(400, {
+        message: "该部门简称已被使用：" + request.departmentShortName,
+      })
+      return
+    }
+    // 获取最大的部门编码
     tempCode = departmentList.reduce((max, item) => {
       return item.departmentCode > max ? item.departmentCode : max;
     }, '');
   }
+  // 生成新的部门编码
   let newCode = generateNewDepartmentCode(tempCode, departmentList.length === 0);
   logger.debug(
     `createDepartment‌Controllers, 新编码:`,

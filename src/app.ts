@@ -39,6 +39,10 @@ app.use(serve(staticPath));
 app.use(router.routes());
 app.use(router.allowedMethods());
 
+/**
+ * 启动服务器
+ * @description 启动Koa应用服务器，连接数据库并启动应用
+ */
 async function startServer() {
   try {
     // 获取最大重试次数
@@ -53,6 +57,7 @@ async function startServer() {
         logger.info("数据库连接已就绪", fileName, "✅");
       })
       .catch((err) => {
+        logger.error(`数据库连接失败，错误信息：${err.message}`, fileName, "❌");
         retryCount++;
         if (retryCount <= RETRY_COUNT) {
           logger.info(`正在重试第 ${retryCount} 次连接`, fileName, "✅");

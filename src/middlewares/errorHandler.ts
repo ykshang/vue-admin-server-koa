@@ -1,5 +1,11 @@
 import { Context } from 'koa';
 
+/**
+ * 错误处理中间件
+ * @description 捕获应用程序中的错误并返回统一的错误响应
+ * @param ctx Koa上下文对象
+ * @param next 下一个中间件函数
+ */
 export default async function(ctx: Context, next: () => Promise<any>) {
   try {
     await next();

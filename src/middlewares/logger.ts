@@ -3,7 +3,13 @@ import { Context } from "vm";
 import logger from "@/utils/logger"; // 导入我们刚创建的logger
 
 let fileName = '[middleware/logger.ts]'
-// 创建一个自定义的日志中间件
+/**
+ * 日志中间件
+ * @description 记录请求的开始和结束时间，以及状态码和耗时
+ * @param ctx Koa上下文对象
+ * @param next 下一个中间件函数
+ * @returns { void } 无返回值
+ */
 export default async function (ctx: Context, next: () => Promise<any>) {
   const start = Date.now(); // 记录开始时间
 

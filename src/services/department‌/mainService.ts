@@ -23,7 +23,7 @@ export default async function mainService(request: any, CTX_REQ_ID?: string) {
   logger.debug(`mainService, params:`, params, fileName, CTX_REQ_ID);
 
   let resul = await DepartmentModel.find(params).sort({
-    updatedAt: "desc",
+    createdAt: "desc",
   });
 
   logger.debug(`mainService, result:`, resul, fileName, CTX_REQ_ID);

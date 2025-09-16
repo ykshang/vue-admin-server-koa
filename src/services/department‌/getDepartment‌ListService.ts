@@ -5,7 +5,7 @@ export default async function getDepartment‌ListService(request: any) {
   const { parentDepartmentCode } = request;
   let resul = await DepartmentModel.find({
     parentDepartmentCode: parentDepartmentCode
-  }).sort({ updatedAt: "desc" })
+  }).sort({ createdAt: "desc" })
   // 每页条数
   return resul
 }

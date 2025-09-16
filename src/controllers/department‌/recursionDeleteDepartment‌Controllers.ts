@@ -3,21 +3,21 @@ import logger from "@/utils/logger"; // 导入我们刚创建的logger
 import { Context } from "koa";
 import DepartmentService from "@/services/department‌";
 
-let fileName = '[Controller] [deleteDepartmentControllers.ts]';
+let fileName = '[Controller] [recursionDeleteDepartment‌Controllers.ts]';
 
-export default async function deleteDepartmentControllers(ctx: Context) {
+export default async function recursionDeleteDepartment‌Controllers(ctx: Context) {
   let CTX_REQ_ID = ctx.requestId;
   let request = ctx.params 
   const departmentCode = request.departmentCode
   logger.debug(
-    `deleteDepartmentControllers, departmentCode:`, 
+    `recursionDeleteDepartment‌Controllers, departmentCode:`, 
     departmentCode,
     fileName,
     CTX_REQ_ID
   );
-  let result = await DepartmentService.recursionDeleteDepartment‌(departmentCode);
+  let result = await DepartmentService.recursionDeleteDepartment‌(departmentCode, CTX_REQ_ID);
   logger.debug(
-    `deleteDepartmentControllers, result:`,
+    `recursionDeleteDepartment‌Controllers, result:`,
     result,
     fileName,
     CTX_REQ_ID

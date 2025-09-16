@@ -77,4 +77,7 @@ const schemaDefinition = new mongoose.Schema({
 schemaDefinition.set("toJSON", { getters: true });
 
 // 导出模型
+/**
+ * @type { DepartmentInterface }
+ */
 export default mongoose.model("department", schemaDefinition, "department");

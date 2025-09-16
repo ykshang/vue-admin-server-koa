@@ -1,28 +1,28 @@
 /**
- * 生成新的部门编码
+ * 生成递增的部门编码
+ * 1. 传入父部门编码：在最后两位添加01
+ * 2. 传入子部门编码：在最后两位数字递增+1
  * @param departmentCode 部门编码
  * @param isParent 是否传入的是父部门编码
- * @returns 新的部门编码
+ * @returns 新的部门编码(20位)
  */
 export default function generateNewDepartmentCode(
   departmentCode: string,
   isParent: boolean
 ) {
-  let codeList = departmentCode.split("");
-  let tempCodeList = [];
-  while (codeList.length > 1) {
-    tempCodeList.push(codeList.splice(0, 2).join(""));
+  let tempCode = departmentCode;
+  while (tempCode.endsWith("00")) {
+    tempCode = tempCode.slice(0, -2);
   }
-  tempCodeList = tempCodeList.filter((item) => item !== "00");
   if (isParent) {
-    tempCodeList.push("01");
+    tempCode += "01";
   } else {
-    let last = tempCodeList.pop();
+    let last = tempCode.slice(-2);
     let temp = Number(last) + 1;
     last = temp < 10 ? "0" + temp : temp.toString();
-    tempCodeList.push(last);
+    tempCode = tempCode.slice(0, -2) + last;
   }
-  let result = tempCodeList.join("") + '00000000000000000000'
+  let result = tempCode + "00000000000000000000";
   // 生成新的部门编码
   return result.slice(0, 20);
 }

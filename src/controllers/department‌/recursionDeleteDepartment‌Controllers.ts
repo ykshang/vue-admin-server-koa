@@ -1,7 +1,5 @@
 import logger from "@/utils/logger"; // 导入我们刚创建的logger
 
-import type { DepartmentInterface } from '@/models/Department‌.model'
-
 import { Context } from "koa";
 import DepartmentService from "@/services/department‌";
 
@@ -17,7 +15,7 @@ export default async function deleteDepartmentControllers(ctx: Context) {
     fileName,
     CTX_REQ_ID
   );
-  let result = await DepartmentService.deleteDepartment‌(departmentCode);
+  let result = await DepartmentService.recursionDeleteDepartment‌(departmentCode);
   logger.debug(
     `deleteDepartmentControllers, result:`,
     result,

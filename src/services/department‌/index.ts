@@ -1,11 +1,11 @@
 import createDepartment‌ from './createDepartment‌Service'
 import getDepartment‌List from './getDepartment‌ListService'
 import main from './mainService'
-import deleteDepartment‌ from './deleteDepartment‌Service'
+import recursionDeleteDepartment‌ from './recursionDeleteDepartment‌Service'
 
 export default {
   createDepartment‌,
   getDepartment‌List,
   main,
-  deleteDepartment‌,
+  recursionDeleteDepartment‌,
 }

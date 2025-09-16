@@ -7,5 +7,5 @@ const router = new Router({ prefix: '/department' })
 router.post('/createDepartment', departmentController.createDepartment‌)
 router.post('/getDepartmentList', departmentController.getDepartment‌List‌)
 router.post('/main', departmentController.main)
-router.delete('/:departmentCode', departmentController.deleteDepartment)
+router.delete('/:departmentCode', departmentController.recursionDeleteDepartment‌)
 export default router

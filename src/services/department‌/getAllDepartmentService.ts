@@ -13,7 +13,7 @@ export default async function getAllDepartmentService(CTX_REQ_ID?: string) {
   logger.debug(`getAllDepartmentService, started:`, fileName, CTX_REQ_ID);
 
   let resul = await DepartmentModel.find().sort({
-    createdAt: "desc",
+    departmentCode: "asc",
   });
 
   logger.debug(`getAllDepartmentService, result:`, resul, fileName, CTX_REQ_ID);

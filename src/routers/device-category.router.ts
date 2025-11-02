@@ -10,7 +10,7 @@ router.post("/list", deviceCategoryController.getDeviceCategoryList);
 // 更新设备分类
 router.post("/update", deviceCategoryController.updateDeviceCategory);
 // 删除设备分类
-// router.post("/delete", deviceCategoryController.deleteDeviceCategory);
+router.post("/delete", deviceCategoryController.deleteDeviceCategory);
 
 
 export default router;

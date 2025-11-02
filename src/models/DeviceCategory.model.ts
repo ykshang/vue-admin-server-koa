@@ -3,12 +3,12 @@ import mongoose, { Document } from "mongoose";
 
 // 定义设备分类接口
 export interface DeviceCategoryInterface extends extFieldDocument, Document {
-  categoryName: string;
-  parentId?: string;
-  description?: string;
-  isRoot?: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
+  categoryName: string; // 分类名称
+  parentId?: string; // 分类父ID
+  description?: string; // 分类描述
+  isRoot?: boolean; // 是否为根分类
+  createdAt?: Date; // 创建时间
+  updatedAt?: Date; // 更新时间
 }
 
 // 定义用户模型

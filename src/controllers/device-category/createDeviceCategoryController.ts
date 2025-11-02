@@ -25,6 +25,12 @@ export default async function (ctx: Context) {
   );
   // 业务必要性校验
   let validateResult = businessValidate(request);
+  logger.debug(
+    `createDeviceCategoryController, businessValidate:`,
+    validateResult,
+    fileName,
+    CTX_REQ_ID
+  );
   if (!validateResult.flag) {
     ctx.throw(400, {
       code: 400,
@@ -47,7 +53,7 @@ function businessValidate(request: DeviceCategoryInterface) {
       message: "分类名称不能为空",
     };
   }
-  if (request.parentId && !request.isRoot) {
+  if (!request.parentId && !request.isRoot) {
     return {
       flag: false,
       message: "非根分类必须指定父分类",

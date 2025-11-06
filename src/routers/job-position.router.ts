@@ -11,5 +11,7 @@ router.post("/list", jobPositionController.getJobPositionList);
 router.post("/update", jobPositionController.updateJobPosition);
 // 删除岗位
 router.post("/delete", jobPositionController.deleteJobPosition);
+// 获取岗位树
+router.post("/tree", jobPositionController.getJobPositionTree);
 
 export default router;

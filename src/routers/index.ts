@@ -8,6 +8,9 @@ import dictionaryRouter from "./dictionary.routers";
 import departmentRouter from "./department‌.router";
 // 设备分类路由
 import deviceCategoryRouter from "./device-category.router";
+// 岗位路由
+import jobPositionRouter from "./job-position.router";
+
 // 添加前缀
 const router = new Router({ prefix: "/api/v1" });
 
@@ -19,5 +22,7 @@ router.use(
   deviceCategoryRouter.routes(),
   deviceCategoryRouter.allowedMethods()
 );
+// 岗位路由
+router.use(jobPositionRouter.routes(), jobPositionRouter.allowedMethods());
 
 export default router;

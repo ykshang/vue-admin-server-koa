@@ -36,6 +36,8 @@ export default async function (request: any) {
         system_account: request.system_account,
         // 账号创建时间
         account_created_time: request.account_created_time,
+        // 岗位ID列表
+        job_position_ids: request.job_position_ids,
         updatedAt: new Date(),
       },
     },

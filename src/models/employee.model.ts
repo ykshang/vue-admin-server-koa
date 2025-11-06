@@ -31,6 +31,7 @@ export interface EmployeeInterface extends extFieldDocument, Document {
   system_account: string;
   // 账号创建时间
   account_created_time: Date;
+  job_position_ids: string[];
 }
 
 // 定义岗位模型
@@ -73,6 +74,11 @@ const SchemaDefinition = new mongoose.Schema({
     trim: true,
     minlength: [1, "身份证号长度不能小于1"],
     maxlength: [18, "身份证号长度不能大于18"],
+  },
+  // 岗位ID列表
+  job_position_ids: {
+    type: [[String]],
+    required: true,
   },
   // 手机号码
   phone: {

@@ -145,6 +145,6 @@ SchemaDefinition.set("toJSON", { getters: true });
 
 // 导出模型
 /**
- * @type { DepartmentInterface }
+ * @type { EmployeeInterface }
  */
 export default mongoose.model("employee", SchemaDefinition, "employee");

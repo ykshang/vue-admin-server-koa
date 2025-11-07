@@ -13,7 +13,7 @@ import jobPositionRouter from "./job-position.router";
 // 员工路由
 import employeeRouter from "./employee.router";
 // 部件路由
-import componetRouter from "./componet.router";
+import componentRouter from "./component.router";
 
 // 添加前缀
 const router = new Router({ prefix: "/api/v1" });
@@ -31,6 +31,6 @@ router.use(jobPositionRouter.routes(), jobPositionRouter.allowedMethods());
 // 员工路由
 router.use(employeeRouter.routes(), employeeRouter.allowedMethods());
 // 组件路由
-router.use(componetRouter.routes(), componetRouter.allowedMethods());
+router.use(componentRouter.routes(), componentRouter.allowedMethods());
 
 export default router;

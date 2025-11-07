@@ -12,6 +12,8 @@ import deviceCategoryRouter from "./device-category.router";
 import jobPositionRouter from "./job-position.router";
 // 员工路由
 import employeeRouter from "./employee.router";
+// 部件路由
+import componetRouter from "./componet.router";
 
 // 添加前缀
 const router = new Router({ prefix: "/api/v1" });
@@ -28,5 +30,7 @@ router.use(
 router.use(jobPositionRouter.routes(), jobPositionRouter.allowedMethods());
 // 员工路由
 router.use(employeeRouter.routes(), employeeRouter.allowedMethods());
+// 组件路由
+router.use(componetRouter.routes(), componetRouter.allowedMethods());
 
 export default router;

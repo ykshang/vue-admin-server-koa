@@ -51,11 +51,18 @@ function listToTree(list: any[], parentId: string): any[] {
   list.forEach((item) => {
     if (item.parentId === parentId) {
       const children = listToTree(list, item.id);
-      const aaa = {
+      type TreeNode = {
+        label: string;
+        value: string;
+        children?: TreeNode[];
+      };
+      const aaa: TreeNode = {
         label: item.workPositionName,
         value: item.id,
-        children: children,
       };
+      if (children.length > 0) {
+        aaa.children = children;
+      }
       tree.push(aaa);
     }
   });

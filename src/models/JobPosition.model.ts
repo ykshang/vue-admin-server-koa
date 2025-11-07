@@ -22,7 +22,6 @@ const SchemaDefinition = new mongoose.Schema({
   workPositionName: {
     type: String,
     required: true,
-    trim: true,
     minlength: [1, "岗位名称长度不能小于1"],
     maxlength: [50, "岗位名称长度不能大于50"],
   },
@@ -30,7 +29,6 @@ const SchemaDefinition = new mongoose.Schema({
   responsibility: {
     type: String,
     default: "",
-    trim: true,
     minlength: [0, "岗位职责长度不能小于0"],
     maxlength: [200, "岗位职责长度不能大于200"],
   },

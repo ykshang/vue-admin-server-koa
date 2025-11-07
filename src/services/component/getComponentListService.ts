@@ -1,8 +1,8 @@
-import EmployeeModel from "@/models/employee.model";
-// let fileName = '[Service] [getEmployeeListService.ts]';
+import ComponentModel from "@/models/component.model";
+// let fileName = '[Service] [getComponentListService.ts]';
 
-export default async function getEmployeeListService(request: any) {
-  let result = await EmployeeModel.find(request).sort({
+export default async function getComponentListService(request: any) {
+  let result = await ComponentModel.find(request).sort({
     createdAt: "desc",
   });
   // 每页条数

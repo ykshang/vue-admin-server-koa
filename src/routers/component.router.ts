@@ -1,7 +1,7 @@
 import Router from "@koa/router";
 import componentController from "@/controllers/component";
 
-const router = new Router({ prefix: "/componet" });
+const router = new Router({ prefix: "/component" });
 
 // 创建组件
 router.post("/create", componentController.createComponet);

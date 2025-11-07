@@ -1,24 +1,24 @@
 import logger from "@/utils/logger"; // 导入我们刚创建的logger
 
 import { Context } from "koa";
-import EmployeeService from "@/services/employee";
-import { EmployeeInterface } from "@/models/employee.model";
+import ComponentService from "@/services/component";
+import { ComponentInterface } from "@/models/component.model";
 
-let fileName = "[Controller] [updateEmployeeController.ts]";
+let fileName = "[Controller] [updateComponentController.ts]";
 
-export default async function updateEmployee(ctx: Context) {
+export default async function updateComponent(ctx: Context) {
   let CTX_REQ_ID = ctx.requestId;
-  let request = ctx.request.body as EmployeeInterface;
+  let request = ctx.request.body as ComponentInterface;
   // 入口日志
   logger.debug(
-    `updateEmployeeController, 更新员工请求参数:`,
+    `updateComponentController, 更新组件请求参数:`,
     request,
     fileName,
     CTX_REQ_ID
   );
-  const result = await EmployeeService.updateEmployee(request);
+  const result = await ComponentService.updateComponent(request);
   logger.debug(
-    `updateEmployeeController, 更新员工处理结果:`,
+    `updateComponentController, 更新组件处理结果:`,
     result,
     fileName,
     CTX_REQ_ID
@@ -26,7 +26,7 @@ export default async function updateEmployee(ctx: Context) {
   ctx.body = {
     code: 200,
     success: true,
-    message: "更新员工成功",
+    message: "更新组件成功",
     result: result,
   };
 }

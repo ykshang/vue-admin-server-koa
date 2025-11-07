@@ -1,14 +1,14 @@
-import EmployeeModel from "@/models/employee.model";
+import ComponentModel from "@/models/component.model";
 import logger from "@/utils/logger";
 
-let fileName = "[Service] [deleteEmployeeService.ts]";
+let fileName = "[Service] [deleteComponentService.ts]";
 
-export default async function deleteEmployeeService(
+export default async function deleteComponentService(
   request: any,
   CTX_REQ_ID?: string
 ) {
-  logger.debug("删除员工请求参数：", request, fileName, CTX_REQ_ID);
-  let result = await EmployeeModel.deleteOne({
+  logger.debug("删除组件请求参数：", request, fileName, CTX_REQ_ID);
+  let result = await ComponentModel.deleteOne({
     _id: request.id,
   });
   return result;

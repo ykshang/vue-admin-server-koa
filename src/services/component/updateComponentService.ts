@@ -1,10 +1,10 @@
-import EmployeeModel from "@/models/employee.model";
+import ComponentModel from "@/models/component.model";
 
-// let fileName = '[Service] [updateEmployeeService.ts]';
+// let fileName = '[Service] [updateComponentService.ts]';
 
 export default async function (request: any) {
   // console.log('请求体', request)
-  const result = await EmployeeModel.findOneAndUpdate(
+  const result = await ComponentModel.findOneAndUpdate(
     { _id: request._id },
     {
       $set: {

@@ -1,10 +1,10 @@
 import logger from "@/utils/logger"; // 导入我们刚创建的logger
 
 import { Context } from "koa";
-import { EmployeeInterface } from "@/models/employee.model";
-import EmployeeService from "@/services/employee";
+import { ComponentInterface } from "@/models/component.model";
+import ComponentService from "@/services/component";
 
-let fileName = "[Controller] [getEmployeeListController.ts]";
+let fileName = "[Controller] [getComponentListController.ts]";
 
 /**
  * 创建部门
@@ -15,19 +15,19 @@ let fileName = "[Controller] [getEmployeeListController.ts]";
 
 export default async function (ctx: Context) {
   let CTX_REQ_ID = ctx.requestId;
-  let request = ctx.request.body as EmployeeInterface;
+  let request = ctx.request.body as ComponentInterface;
   // 入口日志
   logger.debug(
-    `getEmployeeListController, 获取员工列表请求参数:`,
+    `getComponentListController, 获取组件列表请求参数:`,
     request,
     fileName,
     CTX_REQ_ID
   );
-  let result = await EmployeeService.getEmployeeList(request);
+  let result = await ComponentService.getComponentList(request);
   ctx.body = {
     code: 200,
     success: true,
-    message: "获取员工列表成功",
+    message: "获取组件列表成功",
     result: result,
   };
 }

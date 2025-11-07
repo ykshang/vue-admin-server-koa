@@ -1,7 +1,7 @@
-import EmployeeModel from "@/models/employee.model";
-let fileName = "[Service] [createEmployeeService.ts]";
-export default async function createEmployeeModelService(request: any) {
-  console.log("createEmployeeModelService, request:", fileName, request);
-  let result = await new EmployeeModel(request).save();
+import ComponentModel from "@/models/component.model";
+let fileName = "[Service] [createComponentService.ts]";
+export default async function createComponentModelService(request: any) {
+  console.log("createComponentModelService, request:", fileName, request);
+  let result = await new ComponentModel(request).save();
   return result;
 }

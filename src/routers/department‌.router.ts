@@ -15,5 +15,9 @@ router.post('/getDepartmentList', departmentController.getDepartment‌List‌)
 router.get('/getSubDepartments/:parentDepartmentCode', departmentController.getSubDepartments)
 // 删除部门及其子部门
 router.post('/delete/:departmentCode', departmentController.recursionDeleteDepartment‌)
+// 更新部门信息
+router.post('/updateDepartment', departmentController.updateDepartment)
+
+
 
 export default router
